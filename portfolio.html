@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="Personal project portfolio grid. Explore details and live demos of homework, software engineering, and technical projects.">
+    <title>Portfolio - Project Collection</title>
+    <!-- Fonts & Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- Custom Style Sheet -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+    <div id="app" v-cloak>
+        <!-- Navigation Header -->
+        <header :class="{ 'scrolled': scrolled }">
+            <nav>
+                <a href="index.html" class="logo">Big Kuan</a>
+                <ul class="nav-links" :class="{ 'active': menuActive }">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="portfolio.html" class="active">Portfolio</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+                <div class="menu-toggle" @click="toggleMenu">
+                    <i :class="menuActive ? 'fas fa-times' : 'fas fa-bars'"></i>
+                </div>
+            </nav>
+        </header>
+
+        <!-- Main Content -->
+        <main class="portfolio-page">
+            <h1 class="section-title" ref="pageTitle">Project Collection</h1>
+
+            <!-- Filter Buttons -->
+            <div class="filter-container">
+                <button v-for="cat in categories" :key="cat" @click="setFilter(cat)"
+                    :class="['filter-btn', { 'active': filterCategory === cat }]">
+                    {{ cat }}
+                </button>
+            </div>
+
+            <!-- Grid Content -->
+            <div class="portfolio-grid">
+                <div v-for="(item, index) in filteredItems" :key="index" class="portfolio-card glass-panel">
+                    <div class="portfolio-thumb">
+                        <img :src="item.image" :alt="item.title">
+                    </div>
+                    <div class="portfolio-info">
+                        <span class="portfolio-category">{{ item.category }}</span>
+                        <h3 class="portfolio-title">{{ item.title }}</h3>
+                        <p class="portfolio-excerpt">{{ item.excerpt }}</p>
+                        <div class="portfolio-actions">
+                            <button @click="openModal(item)" class="portfolio-btn-view">View Details</button>
+                            <a v-if="item.isProgram" :href="item.programLink" target="_blank"
+                                class="portfolio-btn-demo">Live Demo</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- Glassmorphic Modal Detail View -->
+        <div v-if="selectedItem" class="modal-overlay" @click="closeModal">
+            <div class="modal-wrapper glass-panel" @click.stop>
+                <button class="modal-close-btn" @click="closeModal">&times;</button>
+                <div class="modal-body">
+                    <img :src="selectedItem.image" :alt="selectedItem.title" class="modal-image">
+                    <div class="modal-meta">
+                        <span class="modal-tag">{{ selectedItem.category }}</span>
+                    </div>
+                    <h2 class="modal-title">{{ selectedItem.title }}</h2>
+                    <p class="modal-description" v-html="selectedItem.description"></p>
+                    <div class="modal-actions" style="display:flex; justify-content:flex-end;">
+                        <a v-if="selectedItem.isProgram" :href="selectedItem.programLink" target="_blank"
+                            class="btn-primary"
+                            style="opacity:1; transform:none; padding: 12px 28px; font-size:14px;">Launch Demo</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer>
+            <div class="footer-socials">
+                <a href="https://github.com/bigkuan-chen" target="_blank"><i class="fab fa-github"></i></a>
+                <a href="https://linkedin.com" target="_blank"><i class="fab fa-linkedin"></i></a>
+                <a href="mailto:eagle.chen@gmail.com"><i class="fas fa-envelope"></i></a>
+            </div>
+            <p>&copy; {{ currentYear }} Portfolio. All rights reserved.</p>
+        </footer>
+    </div>
+
+    <!-- Vue 3 and GSAP CDNs -->
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/ScrollTrigger.min.js"></script>
+
+    <script>
+        const { createApp } = Vue;
+
+        createApp({
+            data() {
+                return {
+                    scrolled: false,
+                    menuActive: false,
+                    currentYear: new Date().getFullYear(),
+                    filterCategory: 'All',
+                    selectedItem: null,
+                    categories: ['All', 'Systems & Algorithms', 'AI & Data Science'],
+                    portfolioItems: [
+                        {
+                            title: 'Homework 1: Interactive Pathfinder',
+                            category: 'Systems & Algorithms',
+                            image: 'img/hw1-thumb.png',
+                            excerpt: 'A visualization platform for graph pathfinding, featuring depth-first and breadth-first solutions.',
+                            description: 'This application demonstrates classical graph traversal algorithms, including Randomized Depth-First Search (DFS) for procedural maze generation, and Breadth-First Search (BFS) for computing the shortest path.<br><br>Features an interactive grid layout where users can draw obstacles, set checkpoints, and run real-time visual step-by-step pathfinding computations.',
+                            isProgram: true,
+                            programLink: 'homework1/index.html'
+                        },
+                        {
+                            title: 'Homework 2: Neural Classification Console',
+                            category: 'AI & Data Science',
+                            image: 'img/hw2-thumb.png',
+                            excerpt: 'Client-side machine learning system classifying feature inputs using real-time parameter weighting.',
+                            description: 'This system presents an interactive portal for exploring artificial intelligence classification models. It demonstrates parameter configuration adjustments, real-time matrix updates, performance metrics visualization, and decision boundaries within a responsive web interface.',
+                            isProgram: true,
+                            programLink: 'homework2/index.html'
+                        }
+                    ]
+                }
+            },
+            computed: {
+                filteredItems() {
+                    if (this.filterCategory === 'All') {
+                        return this.portfolioItems;
+                    }
+                    return this.portfolioItems.filter(item => item.category === this.filterCategory);
+                }
+            },
+            methods: {
+                handleScroll() {
+                    this.scrolled = window.scrollY > 50;
+                },
+                toggleMenu() {
+                    this.menuActive = !this.menuActive;
+                },
+                setFilter(category) {
+                    this.filterCategory = category;
+                    // Trigger a re-evaluation of card entry transitions
+                    this.$nextTick(() => {
+                        this.animateCards();
+                    });
+                },
+                openModal(item) {
+                    this.selectedItem = item;
+                    document.body.style.overflow = 'hidden'; // prevent background scrolling
+                },
+                closeModal() {
+                    this.selectedItem = null;
+                    document.body.style.overflow = 'auto'; // restore scrolling
+                },
+                animateCards() {
+                    // Reset opacity and translate cards
+                    gsap.fromTo('.portfolio-card',
+                        { opacity: 0, scale: 0.9, y: 30 },
+                        {
+                            opacity: 1,
+                            scale: 1,
+                            y: 0,
+                            duration: 0.6,
+                            stagger: 0.1,
+                            ease: "power2.out"
+                        }
+                    );
+                },
+                initAnimations() {
+                    // Title and filter entrance animation
+                    gsap.from(this.$refs.pageTitle, {
+                        opacity: 0,
+                        y: -30,
+                        duration: 0.8,
+                        ease: "power3.out"
+                    });
+
+                    gsap.from('.filter-btn', {
+                        opacity: 0,
+                        y: 15,
+                        scale: 0.95,
+                        duration: 0.6,
+                        stagger: 0.08,
+                        ease: "power2.out",
+                        delay: 0.2
+                    });
+
+                    // Trigger card list animation
+                    this.animateCards();
+                }
+            },
+            mounted() {
+                window.addEventListener('scroll', this.handleScroll);
+                this.handleScroll(); // initial state check
+
+                this.$nextTick(() => {
+                    this.initAnimations();
+                });
+            },
+            unmounted() {
+                window.removeEventListener('scroll', this.handleScroll);
+            }
+        }).mount('#app');
+    </script>
+</body>
+
+</html>

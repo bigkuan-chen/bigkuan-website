@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="About me - background, professional engineering skills, and tools. Profile information and expertise details.">
+    <title>About - Personal Profile</title>
+    <!-- Fonts & Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- Custom Style Sheet -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+    <div id="app" v-cloak>
+        <!-- Navigation Header -->
+        <header :class="{ 'scrolled': scrolled }">
+            <nav>
+                <a href="index.html" class="logo">Big Kuan</a>
+                <ul class="nav-links" :class="{ 'active': menuActive }">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="portfolio.html">Portfolio</a></li>
+                    <li><a href="about.html" class="active">About</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+                <div class="menu-toggle" @click="toggleMenu">
+                    <i :class="menuActive ? 'fas fa-times' : 'fas fa-bars'"></i>
+                </div>
+            </nav>
+        </header>
+
+        <!-- Main Content -->
+        <main class="about-page">
+            <div class="about-header">
+                <h1 ref="pageTitle">About Me</h1>
+                <p>Bridging technology, clean code, and interactive visual design.</p>
+            </div>
+
+            <div class="about-grid">
+                <!-- Left Column: Portrait Profile -->
+                <div class="about-photo-wrapper" ref="photoCol">
+                    <img src="img/profile.png" alt="Profile Portrait" class="about-photo">
+                </div>
+
+                <!-- Right Column: Biography & Skills -->
+                <div class="about-text" ref="textCol">
+                    <h2>Hello, I'm a Developer & Designer</h2>
+                    <p>Welcome to my personal workspace. I am currently focused on engineering robust applications and
+                        interactive visual systems, merging numerical accuracy with premium front-end experiences.</p>
+                    <p>My journey spans software development, system design, and algorithms. I enjoy taking complex,
+                        abstract theories—like machine learning classification or recursive graph structures—and
+                        transforming them into accessible, responsive web interfaces.</p>
+                    <p>When I'm not coding, I'm exploring new technologies, refining web architectures, or iterating on
+                        responsive layouts. I believe in clean code, structural integrity, and the power of
+                        micro-animations to improve user experiences.</p>
+
+                    <!-- Technical Skills Wrapper -->
+                    <div class="skills-wrapper">
+                        <h3>Technical Skills</h3>
+
+                        <div class="skill-category">
+                            <h4 class="skill-category-title">Core Development</h4>
+                            <div class="skill-tags">
+                                <span class="skill-tag">HTML5 & CSS3</span>
+                                <span class="skill-tag">JavaScript (ES6+)</span>
+                                <span class="skill-tag">Vue.js</span>
+                                <span class="skill-tag">React.js</span>
+                                <span class="skill-tag">Sass / Less</span>
+                            </div>
+                        </div>
+
+                        <div class="skill-category">
+                            <h4 class="skill-category-title">Systems & Tools</h4>
+                            <div class="skill-tags">
+                                <span class="skill-tag">Python</span>
+                                <span class="skill-tag">Git & GitHub</span>
+                                <span class="skill-tag">WebAssembly (Wasm)</span>
+                                <span class="skill-tag">ONNX Runtime</span>
+                                <span class="skill-tag">Docker</span>
+                            </div>
+                        </div>
+
+                        <div class="skill-category">
+                            <h4 class="skill-category-title">Design & UX</h4>
+                            <div class="skill-tags">
+                                <span class="skill-tag">Figma</span>
+                                <span class="skill-tag">UI/UX Design</span>
+                                <span class="skill-tag">GSAP / Framer Motion</span>
+                                <span class="skill-tag">Graphic Design</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- Footer -->
+        <footer>
+            <div class="footer-socials">
+                <a href="https://github.com/bigkuan-chen" target="_blank"><i class="fab fa-github"></i></a>
+                <a href="https://linkedin.com" target="_blank"><i class="fab fa-linkedin"></i></a>
+                <a href="mailto:eagle.chen@gmail.com"><i class="fas fa-envelope"></i></a>
+            </div>
+            <p>&copy; {{ currentYear }} Portfolio. All rights reserved.</p>
+        </footer>
+    </div>
+
+    <!-- Vue 3 and GSAP CDNs -->
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/ScrollTrigger.min.js"></script>
+
+    <script>
+        const { createApp } = Vue;
+
+        createApp({
+            data() {
+                return {
+                    scrolled: false,
+                    menuActive: false,
+                    currentYear: new Date().getFullYear()
+                }
+            },
+            methods: {
+                handleScroll() {
+                    this.scrolled = window.scrollY > 50;
+                },
+                toggleMenu() {
+                    this.menuActive = !this.menuActive;
+                },
+                initAnimations() {
+                    gsap.registerPlugin(ScrollTrigger);
+
+                    // Title slide down
+                    gsap.from(this.$refs.pageTitle, {
+                        opacity: 0,
+                        y: -30,
+                        duration: 0.8,
+                        ease: "power3.out"
+                    });
+
+                    // Photo slide in from left
+                    gsap.from(this.$refs.photoCol, {
+                        opacity: 0,
+                        x: -50,
+                        duration: 1,
+                        ease: "power3.out",
+                        scrollTrigger: {
+                            trigger: this.$refs.photoCol,
+                            start: 'top bottom-=100',
+                            toggleActions: 'play none none reverse'
+                        }
+                    });
+
+                    // Bio text slide in from right
+                    gsap.from(this.$refs.textCol, {
+                        opacity: 0,
+                        x: 50,
+                        duration: 1,
+                        ease: "power3.out",
+                        scrollTrigger: {
+                            trigger: this.$refs.textCol,
+                            start: 'top bottom-=100',
+                            toggleActions: 'play none none reverse'
+                        }
+                    });
+
+                    // Skill tag hover animation effects are handled via CSS transition rules,
+                    // but we can stagger their initial entry as well
+                    gsap.from('.skill-tag', {
+                        opacity: 0,
+                        scale: 0.8,
+                        y: 10,
+                        duration: 0.5,
+                        stagger: 0.04,
+                        ease: "power2.out",
+                        scrollTrigger: {
+                            trigger: '.skills-wrapper',
+                            start: 'top bottom-=50',
+                            toggleActions: 'play none none reverse'
+                        }
+                    });
+                }
+            },
+            mounted() {
+                window.addEventListener('scroll', this.handleScroll);
+                this.handleScroll(); // initial state check
+
+                this.$nextTick(() => {
+                    this.initAnimations();
+                });
+            },
+            unmounted() {
+                window.removeEventListener('scroll', this.handleScroll);
+            }
+        }).mount('#app');
+    </script>
+</body>
+
+</html>
