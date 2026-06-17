@@ -11,6 +11,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <!-- Custom Style Sheet -->
     <link rel="stylesheet" href="css/style.css">
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="img/can-icon.svg">
 </head>
 
 <body>
@@ -18,12 +20,15 @@
         <!-- Navigation Header -->
         <header :class="{ 'scrolled': scrolled }">
             <nav>
-                <a href="index.html" class="logo">Big Kuan</a>
+                <a href="index.html#home" class="logo">
+                    <img src="img/can-icon.svg" alt="Can Logo" style="height: 32px; width: 32px; vertical-align: middle; margin-right: 8px;">
+                    Big Kuan
+                </a>
                 <ul class="nav-links" :class="{ 'active': menuActive }">
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="portfolio.html" class="active">Portfolio</a></li>
-                    <li><a href="about.html">About</a></li>
-                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="index.html#home">Home</a></li>
+                    <li><a href="index.html#portfolio" class="active">Portfolio</a></li>
+                    <li><a href="index.html#about">About</a></li>
+                    <li><a href="index.html#contact">Contact</a></li>
                 </ul>
                 <div class="menu-toggle" @click="toggleMenu">
                     <i :class="menuActive ? 'fas fa-times' : 'fas fa-bars'"></i>
@@ -54,9 +59,11 @@
                         <h3 class="portfolio-title">{{ item.title }}</h3>
                         <p class="portfolio-excerpt">{{ item.excerpt }}</p>
                         <div class="portfolio-actions">
-                            <button @click="openModal(item)" class="portfolio-btn-view">View Details</button>
-                            <a v-if="item.isProgram" :href="item.programLink" target="_blank"
+                            <button @click="openModal(item)" class="portfolio-btn-view">Details</button>
+                            <a v-if="item.demoLink" :href="item.demoLink" target="_blank"
                                 class="portfolio-btn-demo">Live Demo</a>
+                            <a v-if="item.githubLink" :href="item.githubLink" target="_blank"
+                                class="portfolio-btn-github"><i class="fab fa-github"></i> GitHub</a>
                         </div>
                     </div>
                 </div>
@@ -74,10 +81,13 @@
                     </div>
                     <h2 class="modal-title">{{ selectedItem.title }}</h2>
                     <p class="modal-description" v-html="selectedItem.description"></p>
-                    <div class="modal-actions" style="display:flex; justify-content:flex-end;">
-                        <a v-if="selectedItem.isProgram" :href="selectedItem.programLink" target="_blank"
+                    <div class="modal-actions" style="display:flex; justify-content:flex-end; gap: 12px;">
+                        <a v-if="selectedItem.githubLink" :href="selectedItem.githubLink" target="_blank"
+                            class="portfolio-btn-github"
+                            style="padding: 12px 24px; font-size:14px; border-radius: 50px; display: inline-flex; align-items: center; gap: 8px; justify-content: center; text-transform: uppercase; font-family: var(--font-headings); font-weight: 700;"><i class="fab fa-github"></i> GitHub</a>
+                        <a v-if="selectedItem.demoLink" :href="selectedItem.demoLink" target="_blank"
                             class="btn-primary"
-                            style="opacity:1; transform:none; padding: 12px 28px; font-size:14px;">Launch Demo</a>
+                            style="opacity:1; transform:none; padding: 12px 28px; font-size:14px; margin: 0;">Launch Demo</a>
                     </div>
                 </div>
             </div>
@@ -90,7 +100,7 @@
                 <a href="https://linkedin.com" target="_blank"><i class="fab fa-linkedin"></i></a>
                 <a href="mailto:eagle.chen@gmail.com"><i class="fas fa-envelope"></i></a>
             </div>
-            <p>&copy; {{ currentYear }} Portfolio. All rights reserved.</p>
+            <p>&copy; {{ currentYear }} by CHEN KUAN LIANG. All rights reserved.</p>
         </footer>
     </div>
 
@@ -110,25 +120,25 @@
                     currentYear: new Date().getFullYear(),
                     filterCategory: 'All',
                     selectedItem: null,
-                    categories: ['All', 'Systems & Algorithms', 'AI & Data Science'],
+                    categories: ['All', 'Machine Learning', 'Security & Cryptography'],
                     portfolioItems: [
                         {
-                            title: 'Homework 1: Interactive Pathfinder',
-                            category: 'Systems & Algorithms',
-                            image: 'img/hw1-thumb.png',
-                            excerpt: 'A visualization platform for graph pathfinding, featuring depth-first and breadth-first solutions.',
-                            description: 'This application demonstrates classical graph traversal algorithms, including Randomized Depth-First Search (DFS) for procedural maze generation, and Breadth-First Search (BFS) for computing the shortest path.<br><br>Features an interactive grid layout where users can draw obstacles, set checkpoints, and run real-time visual step-by-step pathfinding computations.',
-                            isProgram: true,
-                            programLink: 'homework1/index.html'
+                            title: '十大機器學習演算法互動學習平台',
+                            category: 'Machine Learning',
+                            image: 'img/top10ml-thumb.png',
+                            excerpt: '本專案將 24MB 包含大量圖片的靜態報告，成功重構並轉換為 Next.js 與 FastAPI 架構的動態互動式機器學習學習平台。',
+                            description: '本專案將一個 <strong>24MB 包含大量 Base64 嵌入圖片的靜態 HTML 研讀報告</strong>，成功重構並轉換為一個現代化、響應式且具備實時演算法運算能力的<strong>動態互動式機器學習學習平台</strong>。<br><br>平台採用 <strong>Next.js (前端)</strong> 與 <strong>FastAPI (後端)</strong> 架構，讓學習者不僅能閱讀理論，還能直接在瀏覽器中調整超參數，即時觀測 Scikit-learn 模型在二維空間中擬合的<strong>決策面 (Decision Boundary)</strong> 與評估指標變動。',
+                            demoLink: 'https://top10mlalgorithm.vercel.app/',
+                            githubLink: 'https://github.com/bigkuan-chen/top10mlalgorithm'
                         },
                         {
-                            title: 'Homework 2: Neural Classification Console',
-                            category: 'AI & Data Science',
-                            image: 'img/hw2-thumb.png',
-                            excerpt: 'Client-side machine learning system classifying feature inputs using real-time parameter weighting.',
-                            description: 'This system presents an interactive portal for exploring artificial intelligence classification models. It demonstrates parameter configuration adjustments, real-time matrix updates, performance metrics visualization, and decision boundaries within a responsive web interface.',
-                            isProgram: true,
-                            programLink: 'homework2/index.html'
+                            title: 'BigCanVault v2 - Web Password Vault Manager',
+                            category: 'Security & Cryptography',
+                            image: 'img/vault-thumb.png',
+                            excerpt: '一個最先進的、零知識 (Zero-Knowledge) 的網頁密碼管理器，使用 WebAssembly (libsodium) 加密並以個人的 Google Drive 作為雲端儲存空間。',
+                            description: 'BigCanVault v2 是一個最先進的、零知識 (Zero-Knowledge) 的網頁密碼管理器。基於 <strong>Next.js</strong>、<strong>TypeScript</strong> 與 <strong>libsodium-wrappers-sumo (WebAssembly)</strong> 開發，並以使用者個人的 <strong>Google Drive</strong> 作為加密資料儲存空間。<br><br>所有密鑰衍生、加解密流程皆在瀏覽器端 (Client-side) 完成，確保伺服器端（如 Vercel）絕不經手任何明文密碼或主金鑰。',
+                            demoLink: 'https://bigcanvault-v2-git-main-eaglechen-9925s-projects.vercel.app/',
+                            githubLink: 'https://github.com/bigkuan-chen/bigcanvault_v2'
                         }
                     ]
                 }

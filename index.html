@@ -11,6 +11,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <!-- Custom Style Sheet -->
     <link rel="stylesheet" href="css/style.css">
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="img/can-icon.svg">
 </head>
 
 <body class="home-body">
@@ -18,12 +20,15 @@
         <!-- Navigation Header -->
         <header :class="{ 'scrolled': scrolled }">
             <nav>
-                <a href="index.html" class="logo">Big Kuan </a>
+                <a href="#home" class="logo" @click.prevent="scrollToSection('home')">
+                    <img src="img/can-icon.svg" alt="Can Logo" style="height: 32px; width: 32px; vertical-align: middle; margin-right: 8px;">
+                    Big Kuan
+                </a>
                 <ul class="nav-links" :class="{ 'active': menuActive }">
-                    <li><a href="index.html" class="active">Home</a></li>
-                    <li><a href="portfolio.html">Portfolio</a></li>
-                    <li><a href="about.html">About</a></li>
-                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="#home" @click.prevent="scrollToSection('home')" :class="{ 'active': activeSection === 'home' }">Home</a></li>
+                    <li><a href="#portfolio" @click.prevent="scrollToSection('portfolio')" :class="{ 'active': activeSection === 'portfolio' }">Portfolio</a></li>
+                    <li><a href="#about" @click.prevent="scrollToSection('about')" :class="{ 'active': activeSection === 'about' }">About</a></li>
+                    <li><a href="#contact" @click.prevent="scrollToSection('contact')" :class="{ 'active': activeSection === 'contact' }">Contact</a></li>
                 </ul>
                 <div class="menu-toggle" @click="toggleMenu">
                     <i :class="menuActive ? 'fas fa-times' : 'fas fa-bars'"></i>
@@ -32,12 +37,174 @@
         </header>
 
         <!-- Hero Landing Banner -->
-        <section class="hero" style="background-image: url('img/hero-bg.png');">
+        <section id="home" class="hero" style="background-image: url('img/hero-dark-bg.png');">
             <div class="hero-content">
-                <h1></h1>
+                <h1>CHEN KUAN LIANG</h1>
                 <h2>Welcome to my digital space. Here you will find my collection of projects and
                     engineering experimentations.</h2>
-                <a href="portfolio.html" class="btn-primary">Explore Portfolio</a>
+                <a href="#portfolio" class="btn-primary" @click.prevent="scrollToSection('portfolio')">Explore Portfolio</a>
+            </div>
+        </section>
+
+        <!-- Portfolio Section -->
+        <section id="portfolio" class="portfolio-page">
+            <h1 class="section-title" ref="portfolioTitle">Project Collection</h1>
+
+            <!-- Filter Buttons -->
+            <div class="filter-container">
+                <button v-for="cat in categories" :key="cat" @click="setFilter(cat)"
+                    :class="['filter-btn', { 'active': filterCategory === cat }]">
+                    {{ cat }}
+                </button>
+            </div>
+
+            <!-- Carousel Slider Container -->
+            <div class="portfolio-carousel-container">
+                <button class="carousel-nav-btn prev-btn" @click="scrollPrev" :disabled="currentSlide === 0" aria-label="Previous Slide">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+                <div class="portfolio-carousel-track-wrapper" ref="carouselWrapper">
+                    <div class="portfolio-carousel-track" :style="{ transform: `translateX(-${currentSlide * slideWidth}px)` }">
+                        <div v-for="(item, index) in filteredItems" :key="index" class="portfolio-card glass-panel">
+                            <div class="portfolio-thumb">
+                                <img :src="item.image" :alt="item.title">
+                            </div>
+                            <div class="portfolio-info">
+                                <span class="portfolio-category">{{ item.category }}</span>
+                                <h3 class="portfolio-title">{{ item.title }}</h3>
+                                <p class="portfolio-excerpt">{{ item.excerpt }}</p>
+                                <div class="portfolio-actions">
+                                    <button @click="openModal(item)" class="portfolio-btn-view">Details</button>
+                                    <a v-if="item.demoLink" :href="item.demoLink" target="_blank"
+                                        class="portfolio-btn-demo">Live Demo</a>
+                                    <a v-if="item.githubLink" :href="item.githubLink" target="_blank"
+                                        class="portfolio-btn-github"><i class="fab fa-github"></i> GitHub</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <button class="carousel-nav-btn next-btn" @click="scrollNext" :disabled="currentSlide >= maxSlides" aria-label="Next Slide">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+            </div>
+        </section>
+
+        <!-- Glassmorphic Modal Detail View -->
+        <div v-if="selectedItem" class="modal-overlay" @click="closeModal">
+            <div class="modal-wrapper glass-panel" @click.stop>
+                <button class="modal-close-btn" @click="closeModal">&times;</button>
+                <div class="modal-body">
+                    <img :src="selectedItem.image" :alt="selectedItem.title" class="modal-image">
+                    <div class="modal-meta">
+                        <span class="modal-tag">{{ selectedItem.category }}</span>
+                    </div>
+                    <h2 class="modal-title">{{ selectedItem.title }}</h2>
+                    <p class="modal-description" v-html="selectedItem.description"></p>
+                    <div class="modal-actions" style="display:flex; justify-content:flex-end; gap: 12px;">
+                        <a v-if="selectedItem.githubLink" :href="selectedItem.githubLink" target="_blank"
+                            class="portfolio-btn-github"
+                            style="padding: 12px 24px; font-size:14px; border-radius: 50px; display: inline-flex; align-items: center; gap: 8px; justify-content: center; text-transform: uppercase; font-family: var(--font-headings); font-weight: 700;"><i class="fab fa-github"></i> GitHub</a>
+                        <a v-if="selectedItem.demoLink" :href="selectedItem.demoLink" target="_blank"
+                            class="btn-primary"
+                            style="opacity:1; transform:none; padding: 12px 28px; font-size:14px; margin: 0;">Launch Demo</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- About Section -->
+        <section id="about" class="about-page">
+            <div class="about-header">
+                <h1 ref="aboutTitle">About Me</h1>
+                <p>Bridging technology, clean code, and interactive visual design.</p>
+            </div>
+
+            <div class="about-grid">
+                <!-- Left Column: Portrait Profile -->
+                <div class="about-photo-wrapper" ref="photoCol">
+                    <img src="img/profile.png" alt="Profile Portrait" class="about-photo">
+                </div>
+
+                <!-- Right Column: Biography & Skills -->
+                <div class="about-text" ref="textCol">
+                    <h2>Hello, I'm a Developer & Designer</h2>
+                    <p>Welcome to my personal workspace. I am currently focused on engineering robust applications and
+                        interactive visual systems, merging numerical accuracy with premium front-end experiences.</p>
+                    <p>My journey spans software development, system design, and algorithms. I enjoy taking complex,
+                        abstract theories—like machine learning classification or recursive graph structures—and
+                        transforming them into accessible, responsive web interfaces.</p>
+                    <p>When I'm not coding, I'm exploring new technologies, refining web architectures, or iterating on
+                        responsive layouts. I believe in clean code, structural integrity, and the power of
+                        micro-animations to improve user experiences.</p>
+
+                    <!-- Technical Skills Wrapper -->
+                    <div class="skills-wrapper">
+                        <h3>Technical Skills</h3>
+
+                        <div class="skill-category">
+                            <h4 class="skill-category-title">Core Development</h4>
+                            <div class="skill-tags">
+                                <span class="skill-tag">HTML5 & CSS3</span>
+                                <span class="skill-tag">JavaScript (ES6+)</span>
+                                <span class="skill-tag">Vue.js</span>
+                                <span class="skill-tag">React.js</span>
+                                <span class="skill-tag">Sass / Less</span>
+                            </div>
+                        </div>
+
+                        <div class="skill-category">
+                            <h4 class="skill-category-title">Systems & Tools</h4>
+                            <div class="skill-tags">
+                                <span class="skill-tag">Python</span>
+                                <span class="skill-tag">Git & GitHub</span>
+                                <span class="skill-tag">WebAssembly (Wasm)</span>
+                                <span class="skill-tag">ONNX Runtime</span>
+                                <span class="skill-tag">Docker</span>
+                            </div>
+                        </div>
+
+                        <div class="skill-category">
+                            <h4 class="skill-category-title">Design & UX</h4>
+                            <div class="skill-tags">
+                                <span class="skill-tag">Figma</span>
+                                <span class="skill-tag">UI/UX Design</span>
+                                <span class="skill-tag">GSAP / Framer Motion</span>
+                                <span class="skill-tag">Graphic Design</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="contact-page">
+            <div class="contact-card glass-panel" ref="contactCard">
+                <h1 ref="contactTitle">Let's Connect</h1>
+                <p>I am always interested in discussing new opportunities, collaborating on innovative technical
+                    projects, or answering questions about my homework implementations.</p>
+
+                <!-- Custom interactive email container -->
+                <div class="contact-email">
+                    <a href="mailto:eagle.chen@gmail.com" ref="emailLink" @mouseenter="animateEmail"
+                        @mouseleave="resetEmail">
+                        eagle.chen@gmail.com
+                    </a>
+                </div>
+
+                <!-- Social links -->
+                <div class="social-links">
+                    <a href="https://github.com/bigkuan-chen" target="_blank" class="social-btn" aria-label="GitHub">
+                        <i class="fab fa-github"></i>
+                    </a>
+                    <a href="https://linkedin.com" target="_blank" class="social-btn" aria-label="LinkedIn">
+                        <i class="fab fa-linkedin"></i>
+                    </a>
+                    <a href="mailto:eagle.chen@gmail.com" class="social-btn" aria-label="Email">
+                        <i class="fas fa-envelope"></i>
+                    </a>
+                </div>
             </div>
         </section>
 
@@ -65,21 +232,163 @@
                 return {
                     scrolled: false,
                     menuActive: false,
-                    currentYear: new Date().getFullYear()
+                    currentYear: new Date().getFullYear(),
+                    filterCategory: 'All',
+                    selectedItem: null,
+                    currentSlide: 0,
+                    slideWidth: 0,
+                    isMobile: false,
+                    activeSection: 'home',
+                    categories: ['All', 'Machine Learning', 'Security & Cryptography', 'Systems & Algorithms', 'AI & Data Science'],
+                    portfolioItems: [
+                        {
+                            title: '十大機器學習演算法互動學習平台',
+                            category: 'Machine Learning',
+                            image: 'img/top10ml-thumb.png',
+                            excerpt: '本專案將 24MB 包含大量圖片的靜態報告，成功重構並轉換為 Next.js 與 FastAPI 架構的動態互動式機器學習學習平台。',
+                            description: '本專案將一個 <strong>24MB 包含大量 Base64 嵌入圖片的靜態 HTML 研讀報告</strong>，成功重構並轉換為一個現代化、響應式且具備實時演算法運算能力的<strong>動態互動式機器學習學習平台</strong>。<br><br>平台採用 <strong>Next.js (前端)</strong> 與 <strong>FastAPI (後端)</strong> 架構，讓學習者不僅能閱讀理論，還能直接在瀏覽器中調整超參數，即時觀測 Scikit-learn 模型在二維空間中擬合的<strong>決策面 (Decision Boundary)</strong> 與評估指標變動。',
+                            demoLink: 'https://top10mlalgorithm.vercel.app/',
+                            githubLink: 'https://github.com/bigkuan-chen/top10mlalgorithm'
+                        },
+                        {
+                            title: 'BigCanVault v2 - Web Password Vault Manager',
+                            category: 'Security & Cryptography',
+                            image: 'img/vault-thumb.png',
+                            excerpt: '一個最先進的、零知識 (Zero-Knowledge) 的網頁密碼管理器，使用 WebAssembly (libsodium) 加密並以個人的 Google Drive 作為雲端儲存空間。',
+                            description: 'BigCanVault v2 是一個最先進的、零知識 (Zero-Knowledge) 的網頁密碼管理器。基於 <strong>Next.js</strong>、<strong>TypeScript</strong> 與 <strong>libsodium-wrappers-sumo (WebAssembly)</strong> 開發，並以使用者個人的 <strong>Google Drive</strong> 作為加密資料儲存空間。<br><br>所有密鑰衍生、加解密流程皆在瀏覽器端 (Client-side) 完成，確保伺服器端（如 Vercel）絕不經手任何明文密碼或主金鑰。',
+                            demoLink: 'https://bigcanvault-v2-git-main-eaglechen-9925s-projects.vercel.app/',
+                            githubLink: 'https://github.com/bigkuan-chen/bigcanvault_v2'
+                        },
+                        {
+                            title: 'Homework 1: Interactive Pathfinder',
+                            category: 'Systems & Algorithms',
+                            image: 'img/hw1-thumb.png',
+                            excerpt: 'A visualization platform for graph pathfinding, featuring depth-first and breadth-first solutions.',
+                            description: 'This application demonstrates classical graph traversal algorithms, including Randomized Depth-First Search (DFS) for procedural maze generation, and Breadth-First Search (BFS) for computing the shortest path.<br><br>Features an interactive grid layout where users can draw obstacles, set checkpoints, and run real-time visual step-by-step pathfinding computations.',
+                            demoLink: 'homework1/index.html'
+                        },
+                        {
+                            title: 'Homework 2: Neural Classification Console',
+                            category: 'AI & Data Science',
+                            image: 'img/hw2-thumb.png',
+                            excerpt: 'Client-side machine learning system classifying feature inputs using real-time parameter weighting.',
+                            description: 'This system presents an interactive portal for exploring artificial intelligence classification models. It demonstrates parameter configuration adjustments, real-time matrix updates, performance metrics visualization, and decision boundaries within a responsive web interface.',
+                            demoLink: 'homework2/index.html'
+                        }
+                    ]
+                }
+            },
+            computed: {
+                filteredItems() {
+                    if (this.filterCategory === 'All') {
+                        return this.portfolioItems;
+                    }
+                    return this.portfolioItems.filter(item => item.category === this.filterCategory);
+                },
+                maxSlides() {
+                    const items = this.filteredItems;
+                    if (!items.length) return 0;
+                    const visibleCards = this.isMobile ? 1 : 2;
+                    return Math.max(0, items.length - visibleCards);
                 }
             },
             methods: {
                 handleScroll() {
                     this.scrolled = window.scrollY > 50;
+                    this.checkActiveSection();
                 },
                 toggleMenu() {
                     this.menuActive = !this.menuActive;
                 },
-                goToPortfolio() {
-                    window.location.href = 'portfolio.html';
+                scrollToSection(sectionId) {
+                    this.menuActive = false;
+                    const element = document.getElementById(sectionId);
+                    if (element) {
+                        element.scrollIntoView({ behavior: 'smooth' });
+                    }
+                },
+                checkActiveSection() {
+                    const sections = ['home', 'portfolio', 'about', 'contact'];
+                    const scrollPosition = window.scrollY + window.innerHeight / 3;
+
+                    for (const sectionId of sections) {
+                        const element = document.getElementById(sectionId);
+                        if (element) {
+                            const top = element.offsetTop;
+                            const height = element.offsetHeight;
+                            if (scrollPosition >= top && scrollPosition < top + height) {
+                                this.activeSection = sectionId;
+                                break;
+                            }
+                        }
+                    }
+                },
+                setFilter(category) {
+                    this.filterCategory = category;
+                    this.currentSlide = 0;
+                    this.$nextTick(() => {
+                        this.updateSlideWidth();
+                        this.animateCards();
+                    });
+                },
+                openModal(item) {
+                    this.selectedItem = item;
+                    document.body.style.overflow = 'hidden';
+                },
+                closeModal() {
+                    this.selectedItem = null;
+                    document.body.style.overflow = 'auto';
+                },
+                scrollPrev() {
+                    if (this.currentSlide > 0) {
+                        this.currentSlide--;
+                    }
+                },
+                scrollNext() {
+                    if (this.currentSlide < this.maxSlides) {
+                        this.currentSlide++;
+                    }
+                },
+                updateSlideWidth() {
+                    const card = this.$refs.carouselWrapper?.querySelector('.portfolio-card');
+                    if (card) {
+                        this.slideWidth = card.offsetWidth + 30; // 30 is the gap
+                    }
+                },
+                handleResize() {
+                    this.isMobile = window.innerWidth <= 768;
+                    this.updateSlideWidth();
+                },
+                animateEmail() {
+                    gsap.to(this.$refs.emailLink, {
+                        scale: 1.05,
+                        textShadow: "0 0 15px rgba(0, 242, 254, 0.4)",
+                        duration: 0.3,
+                        ease: "power2.out"
+                    });
+                },
+                resetEmail() {
+                    gsap.to(this.$refs.emailLink, {
+                        scale: 1,
+                        textShadow: "none",
+                        duration: 0.3,
+                        ease: "power2.out"
+                    });
+                },
+                animateCards() {
+                    gsap.fromTo('.portfolio-card',
+                        { opacity: 0, scale: 0.9, y: 30 },
+                        {
+                            opacity: 1,
+                            scale: 1,
+                            y: 0,
+                            duration: 0.6,
+                            stagger: 0.1,
+                            ease: "power2.out"
+                        }
+                    );
                 },
                 initAnimations() {
-                    // Register ScrollTrigger plugin
                     gsap.registerPlugin(ScrollTrigger);
 
                     // Hero animations
@@ -106,34 +415,98 @@
                         ease: "power3.out"
                     });
 
-                    // Gallery Cards Entrance trigger
-                    gsap.utils.toArray('.gallery-card').forEach((card, index) => {
-                        gsap.to(card, {
-                            opacity: 1,
-                            scale: 1,
-                            duration: 0.8,
-                            scrollTrigger: {
-                                trigger: card,
-                                start: 'top bottom-=100',
-                                toggleActions: 'play none none reverse'
-                            },
-                            delay: index * 0.15,
-                            ease: "power3.out"
-                        });
+                    // Portfolio title animation
+                    gsap.from(this.$refs.portfolioTitle, {
+                        opacity: 0,
+                        y: -30,
+                        duration: 0.8,
+                        ease: "power3.out",
+                        scrollTrigger: {
+                            trigger: '#portfolio',
+                            start: 'top bottom-=100',
+                            toggleActions: 'play none none reverse'
+                        }
+                    });
+
+                    // About section animations
+                    gsap.from(this.$refs.aboutTitle, {
+                        opacity: 0,
+                        y: -30,
+                        duration: 0.8,
+                        ease: "power3.out",
+                        scrollTrigger: {
+                            trigger: '#about',
+                            start: 'top bottom-=100',
+                            toggleActions: 'play none none reverse'
+                        }
+                    });
+
+                    gsap.from(this.$refs.photoCol, {
+                        opacity: 0,
+                        x: -50,
+                        duration: 1,
+                        ease: "power3.out",
+                        scrollTrigger: {
+                            trigger: this.$refs.photoCol,
+                            start: 'top bottom-=100',
+                            toggleActions: 'play none none reverse'
+                        }
+                    });
+
+                    gsap.from(this.$refs.textCol, {
+                        opacity: 0,
+                        x: 50,
+                        duration: 1,
+                        ease: "power3.out",
+                        scrollTrigger: {
+                            trigger: this.$refs.textCol,
+                            start: 'top bottom-=100',
+                            toggleActions: 'play none none reverse'
+                        }
+                    });
+
+                    gsap.from('.skill-tag', {
+                        opacity: 0,
+                        scale: 0.8,
+                        y: 10,
+                        duration: 0.5,
+                        stagger: 0.04,
+                        ease: "power2.out",
+                        scrollTrigger: {
+                            trigger: '.skills-wrapper',
+                            start: 'top bottom-=50',
+                            toggleActions: 'play none none reverse'
+                        }
+                    });
+
+                    // Contact section animation
+                    gsap.from(this.$refs.contactCard, {
+                        opacity: 0,
+                        y: 40,
+                        duration: 0.8,
+                        ease: "power3.out",
+                        scrollTrigger: {
+                            trigger: '#contact',
+                            start: 'top bottom-=100',
+                            toggleActions: 'play none none reverse'
+                        }
                     });
                 }
             },
             mounted() {
                 window.addEventListener('scroll', this.handleScroll);
-                this.handleScroll(); // initial state check
-
-                // Initialize GSAP animations on tick
+                window.addEventListener('resize', this.handleResize);
+                this.handleScroll();
+                
                 this.$nextTick(() => {
+                    this.handleResize();
                     this.initAnimations();
+                    this.animateCards();
                 });
             },
             unmounted() {
                 window.removeEventListener('scroll', this.handleScroll);
+                window.removeEventListener('resize', this.handleResize);
             }
         }).mount('#app');
     </script>
