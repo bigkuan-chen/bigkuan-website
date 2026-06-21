@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description"
-        content="Personal project portfolio grid. Explore details and live demos of homework, software engineering, and technical projects.">
+        content="Personal project portfolio grid. Explore details and live demos of AI applications, software engineering, and technical projects.">
     <title>Portfolio - Project Collection</title>
     <!-- Fonts & Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
@@ -120,7 +120,7 @@
                     currentYear: new Date().getFullYear(),
                     filterCategory: 'All',
                     selectedItem: null,
-                    categories: ['All', 'Machine Learning', 'Security & Cryptography'],
+                    categories: ['All', 'Machine Learning', 'Security & Cryptography', 'AI & Data Science'],
                     portfolioItems: [
                         {
                             title: '十大機器學習演算法互動學習平台',
@@ -139,6 +139,14 @@
                             description: 'BigCanVault v2 是一個最先進的、零知識 (Zero-Knowledge) 的網頁密碼管理器。基於 <strong>Next.js</strong>、<strong>TypeScript</strong> 與 <strong>libsodium-wrappers-sumo (WebAssembly)</strong> 開發，並以使用者個人的 <strong>Google Drive</strong> 作為加密資料儲存空間。<br><br>所有密鑰衍生、加解密流程皆在瀏覽器端 (Client-side) 完成，確保伺服器端（如 Vercel）絕不經手任何明文密碼或主金鑰。',
                             demoLink: 'https://bigcanvault-v2-git-main-eaglechen-9925s-projects.vercel.app/',
                             githubLink: 'https://github.com/bigkuan-chen/bigcanvault_v2'
+                        },
+                        {
+                            title: 'AI WordPilot - 智慧英文單字學習系統',
+                            category: 'AI & Data Science',
+                            image: 'img/ai-wordpilot-thumb.png',
+                            excerpt: '結合 Google Gemini 語意分析與間隔重複（Spaced Repetition）演算法的智慧英文單字學習系統。',
+                            description: 'AI WordPilot 是一款結合 <strong>Google Gemini 語意分析</strong>與<strong>間隔重複（Spaced Repetition）演算法</strong>的智慧英文單字學習系統，專為提升單字記憶效率設計。<br><br><strong>核心功能特色：</strong><br>• <strong>AI 智慧單字查詢與解析</strong>：雙語詳細釋義、CEFR 難度分級、詞頻統計、語音朗讀（TTS）及相似與混淆字彙語境對比。<br>• <strong>我的單字與混淆字對比收藏</strong>：打造個人專屬單字庫與對比卡片。<br>• <strong>加權間隔重複複習系統</strong>：結合 SuperMemo-2 (SM2) 演算法設計，提供英翻中、中翻英、情境選字、相似字辨識等四種智慧題型，並依據自評記憶回饋動態調整複習天數，達到最高記憶維持率。<br>• <strong>現代跨平台架構</strong>：使用 <strong>Flutter & Riverpod</strong> 開發，Web 端支援 SharedPreferences 本地持久化快取，並整合 Google Gemini API 生成結構化單字資料。',
+                            githubLink: 'https://github.com/bigkuan-chen/AIEngDic'
                         }
                     ]
                 }

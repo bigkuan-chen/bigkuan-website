@@ -183,7 +183,7 @@
             <div class="contact-card glass-panel" ref="contactCard">
                 <h1 ref="contactTitle">Let's Connect</h1>
                 <p>I am always interested in discussing new opportunities, collaborating on innovative technical
-                    projects, or answering questions about my homework implementations.</p>
+                    projects, or answering questions about my project implementations.</p>
 
                 <!-- Custom interactive email container -->
                 <div class="contact-email">
@@ -239,7 +239,7 @@
                     slideWidth: 0,
                     isMobile: false,
                     activeSection: 'home',
-                    categories: ['All', 'Machine Learning', 'Security & Cryptography', 'Systems & Algorithms', 'AI & Data Science'],
+                    categories: ['All', 'Machine Learning', 'Security & Cryptography', 'AI & Data Science'],
                     portfolioItems: [
                         {
                             title: '十大機器學習演算法互動學習平台',
@@ -260,20 +260,12 @@
                             githubLink: 'https://github.com/bigkuan-chen/bigcanvault_v2'
                         },
                         {
-                            title: 'Homework 1: Interactive Pathfinder',
-                            category: 'Systems & Algorithms',
-                            image: 'img/hw1-thumb.png',
-                            excerpt: 'A visualization platform for graph pathfinding, featuring depth-first and breadth-first solutions.',
-                            description: 'This application demonstrates classical graph traversal algorithms, including Randomized Depth-First Search (DFS) for procedural maze generation, and Breadth-First Search (BFS) for computing the shortest path.<br><br>Features an interactive grid layout where users can draw obstacles, set checkpoints, and run real-time visual step-by-step pathfinding computations.',
-                            demoLink: 'homework1/index.html'
-                        },
-                        {
-                            title: 'Homework 2: Neural Classification Console',
+                            title: 'AI WordPilot - 智慧英文單字學習系統',
                             category: 'AI & Data Science',
-                            image: 'img/hw2-thumb.png',
-                            excerpt: 'Client-side machine learning system classifying feature inputs using real-time parameter weighting.',
-                            description: 'This system presents an interactive portal for exploring artificial intelligence classification models. It demonstrates parameter configuration adjustments, real-time matrix updates, performance metrics visualization, and decision boundaries within a responsive web interface.',
-                            demoLink: 'homework2/index.html'
+                            image: 'img/ai-wordpilot-thumb.png',
+                            excerpt: '結合 Google Gemini 語意分析與間隔重複（Spaced Repetition）演算法的智慧英文單字學習系統。',
+                            description: 'AI WordPilot 是一款結合 <strong>Google Gemini 語意分析</strong>與<strong>間隔重複（Spaced Repetition）演算法</strong>的智慧英文單字學習系統，專為提升單字記憶效率設計。<br><br><strong>核心功能特色：</strong><br>• <strong>AI 智慧單字查詢與解析</strong>：雙語詳細釋義、CEFR 難度分級、詞頻統計、語音朗讀（TTS）及相似與混淆字彙語境對比。<br>• <strong>我的單字與混淆字對比收藏</strong>：打造個人專屬單字庫與對比卡片。<br>• <strong>加權間隔重複複習系統</strong>：結合 SuperMemo-2 (SM2) 演算法設計，提供英翻中、中翻英、情境選字、相似字辨識等四種智慧題型，並依據自評記憶回饋動態調整複習天數，達到最高記憶維持率。<br>• <strong>現代跨平台架構</strong>：使用 <strong>Flutter & Riverpod</strong> 開發，Web 端支援 SharedPreferences 本地持久化快取，並整合 Google Gemini API 生成結構化單字資料。',
+                            githubLink: 'https://github.com/bigkuan-chen/AIEngDic'
                         }
                     ]
                 }
