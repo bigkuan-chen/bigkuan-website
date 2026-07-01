@@ -21,14 +21,19 @@
         <header :class="{ 'scrolled': scrolled }">
             <nav>
                 <a href="#home" class="logo" @click.prevent="scrollToSection('home')">
-                    <img src="img/can-icon.svg" alt="Can Logo" style="height: 32px; width: 32px; vertical-align: middle; margin-right: 8px;">
+                    <img src="img/can-icon.svg" alt="Can Logo"
+                        style="height: 32px; width: 32px; vertical-align: middle; margin-right: 8px;">
                     Big Kuan
                 </a>
                 <ul class="nav-links" :class="{ 'active': menuActive }">
-                    <li><a href="#home" @click.prevent="scrollToSection('home')" :class="{ 'active': activeSection === 'home' }">Home</a></li>
-                    <li><a href="#portfolio" @click.prevent="scrollToSection('portfolio')" :class="{ 'active': activeSection === 'portfolio' }">Portfolio</a></li>
-                    <li><a href="#about" @click.prevent="scrollToSection('about')" :class="{ 'active': activeSection === 'about' }">About</a></li>
-                    <li><a href="#contact" @click.prevent="scrollToSection('contact')" :class="{ 'active': activeSection === 'contact' }">Contact</a></li>
+                    <li><a href="#home" @click.prevent="scrollToSection('home')"
+                            :class="{ 'active': activeSection === 'home' }">Home</a></li>
+                    <li><a href="#portfolio" @click.prevent="scrollToSection('portfolio')"
+                            :class="{ 'active': activeSection === 'portfolio' }">Portfolio</a></li>
+                    <li><a href="#about" @click.prevent="scrollToSection('about')"
+                            :class="{ 'active': activeSection === 'about' }">About</a></li>
+                    <li><a href="#contact" @click.prevent="scrollToSection('contact')"
+                            :class="{ 'active': activeSection === 'contact' }">Contact</a></li>
                 </ul>
                 <div class="menu-toggle" @click="toggleMenu">
                     <i :class="menuActive ? 'fas fa-times' : 'fas fa-bars'"></i>
@@ -37,12 +42,14 @@
         </header>
 
         <!-- Hero Landing Banner -->
-        <section id="home" class="hero" style="background-image: url('img/hero-dark-bg.png');">
+        <section id="home" class="hero" style="background-image: url('img/hero-bg.png');">
             <div class="hero-content">
                 <h1>CHEN KUAN LIANG</h1>
-                <h2>Welcome to my digital space. Here you will find my collection of projects and
-                    engineering experimentations.</h2>
-                <a href="#portfolio" class="btn-primary" @click.prevent="scrollToSection('portfolio')">Explore Portfolio</a>
+                <h2>Originally specialized in ERP system development, now focused on building AI-driven software
+                    solutions. Combining enterprise knowhow with artificial intelligence to create smarter, more
+                    efficient ERP systems and business applications.</h2>
+                <a href="#portfolio" class="btn-primary" @click.prevent="scrollToSection('portfolio')">Explore
+                    Portfolio</a>
             </div>
         </section>
 
@@ -60,11 +67,13 @@
 
             <!-- Carousel Slider Container -->
             <div class="portfolio-carousel-container">
-                <button class="carousel-nav-btn prev-btn" @click="scrollPrev" :disabled="currentSlide === 0" aria-label="Previous Slide">
+                <button class="carousel-nav-btn prev-btn" @click="scrollPrev" :disabled="currentSlide === 0"
+                    aria-label="Previous Slide">
                     <i class="fas fa-chevron-left"></i>
                 </button>
                 <div class="portfolio-carousel-track-wrapper" ref="carouselWrapper">
-                    <div class="portfolio-carousel-track" :style="{ transform: `translateX(-${currentSlide * slideWidth}px)` }">
+                    <div class="portfolio-carousel-track"
+                        :style="{ transform: `translateX(-${currentSlide * slideWidth}px)` }">
                         <div v-for="(item, index) in filteredItems" :key="index" class="portfolio-card glass-panel">
                             <div class="portfolio-thumb">
                                 <img :src="item.image" :alt="item.title">
@@ -84,7 +93,8 @@
                         </div>
                     </div>
                 </div>
-                <button class="carousel-nav-btn next-btn" @click="scrollNext" :disabled="currentSlide >= maxSlides" aria-label="Next Slide">
+                <button class="carousel-nav-btn next-btn" @click="scrollNext" :disabled="currentSlide >= maxSlides"
+                    aria-label="Next Slide">
                     <i class="fas fa-chevron-right"></i>
                 </button>
             </div>
@@ -104,10 +114,12 @@
                     <div class="modal-actions" style="display:flex; justify-content:flex-end; gap: 12px;">
                         <a v-if="selectedItem.githubLink" :href="selectedItem.githubLink" target="_blank"
                             class="portfolio-btn-github"
-                            style="padding: 12px 24px; font-size:14px; border-radius: 50px; display: inline-flex; align-items: center; gap: 8px; justify-content: center; text-transform: uppercase; font-family: var(--font-headings); font-weight: 700;"><i class="fab fa-github"></i> GitHub</a>
+                            style="padding: 12px 24px; font-size:14px; border-radius: 50px; display: inline-flex; align-items: center; gap: 8px; justify-content: center; text-transform: uppercase; font-family: var(--font-headings); font-weight: 700;"><i
+                                class="fab fa-github"></i> GitHub</a>
                         <a v-if="selectedItem.demoLink" :href="selectedItem.demoLink" target="_blank"
                             class="btn-primary"
-                            style="opacity:1; transform:none; padding: 12px 28px; font-size:14px; margin: 0;">Launch Demo</a>
+                            style="opacity:1; transform:none; padding: 12px 28px; font-size:14px; margin: 0;">Launch
+                            Demo</a>
                     </div>
                 </div>
             </div>
@@ -354,7 +366,7 @@
                 updateSlideWidth() {
                     const card = this.$refs.carouselWrapper?.querySelector('.portfolio-card');
                     if (card) {
-                        this.slideWidth = card.offsetWidth + 30; // 30 is the gap
+                        this.slideWidth = card.offsetWidth + 28; // Keep this in sync with the carousel gap in CSS.
                     }
                 },
                 handleResize() {
@@ -499,7 +511,7 @@
                 window.addEventListener('scroll', this.handleScroll);
                 window.addEventListener('resize', this.handleResize);
                 this.handleScroll();
-                
+
                 this.$nextTick(() => {
                     this.handleResize();
                     this.initAnimations();
