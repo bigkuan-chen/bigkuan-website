@@ -575,8 +575,8 @@ nav {
     width: 100vw;
     transform: translateX(-50%);
     background:
-        radial-gradient(ellipse at 50% 48%, rgba(248, 252, 255, 1) 0%, rgba(178, 195, 207, 0.74) 38%, rgba(108, 126, 139, 0.82) 76%, #465660 100%),
-        linear-gradient(180deg, #546773 0%, #607783 48%, #4a5d68 100%);
+        radial-gradient(ellipse at 50% 46%, rgba(255, 255, 255, 0.98) 0%, rgba(225, 241, 249, 0.92) 34%, rgba(199, 216, 228, 0.86) 68%, #d9e4ec 100%),
+        linear-gradient(180deg, #eef7fb 0%, #dce9f0 50%, #edf4f8 100%);
     z-index: -2;
 }
 
@@ -589,9 +589,12 @@ nav {
     width: 100vw;
     transform: translateX(-50%);
     background:
-        radial-gradient(ellipse at 50% 44%, rgba(255, 255, 255, 0.48), transparent 34rem),
-        radial-gradient(ellipse at 50% 55%, transparent 0%, transparent 46%, rgba(37, 53, 64, 0.22) 90%),
-        radial-gradient(circle at 50% 46%, rgba(14, 165, 233, 0.13), transparent 26rem);
+        radial-gradient(ellipse at 50% 42%, rgba(255, 255, 255, 0.5), transparent 34rem),
+        radial-gradient(ellipse at 50% 56%, transparent 0%, transparent 50%, rgba(100, 116, 139, 0.12) 92%),
+        radial-gradient(circle at 50% 46%, rgba(14, 165, 233, 0.12), transparent 28rem),
+        linear-gradient(rgba(14, 165, 233, 0.045) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(14, 165, 233, 0.045) 1px, transparent 1px);
+    background-size: auto, auto, auto, 48px 48px, 48px 48px;
     -webkit-mask-image: linear-gradient(180deg, transparent, #000 10%, #000 90%, transparent);
     mask-image: linear-gradient(180deg, transparent, #000 10%, #000 90%, transparent);
     pointer-events: none;
@@ -622,21 +625,7 @@ nav {
 }
 
 .about-page::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 50%;
-    width: 100vw;
-    transform: translateX(-50%);
-    background:
-        linear-gradient(rgba(148, 163, 184, 0.08) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(148, 163, 184, 0.08) 1px, transparent 1px);
-    background-size: 44px 44px, 44px 44px;
-    -webkit-mask-image: linear-gradient(180deg, transparent, #000 10%, #000 90%, transparent);
-    mask-image: linear-gradient(180deg, transparent, #000 10%, #000 90%, transparent);
-    pointer-events: none;
-    z-index: -1;
+    display: none;
 }
 
 .filter-container {
