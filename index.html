@@ -28,8 +28,7 @@
                 <ul class="nav-links" :class="{ 'active': menuActive }">
                     <li><a href="#home" @click.prevent="scrollToSection('home')"
                             :class="{ 'active': activeSection === 'home' }">Home</a></li>
-                    <li><a href="#portfolio" @click.prevent="scrollToSection('portfolio')"
-                            :class="{ 'active': activeSection === 'portfolio' }">Portfolio</a></li>
+                    <li><a href="portfolio.html">Portfolio</a></li>
                     <li><a href="about.html">About</a></li>
                     <li><a href="#contact" @click.prevent="scrollToSection('contact')"
                             :class="{ 'active': activeSection === 'contact' }">Contact</a></li>
@@ -47,82 +46,11 @@
                 <h2>Originally specialized in ERP system development, now focused on building AI-driven software
                     solutions. Combining enterprise knowhow with artificial intelligence to create smarter, more
                     efficient ERP systems and business applications.</h2>
-                <a href="#portfolio" class="btn-primary" @click.prevent="scrollToSection('portfolio')">Explore
-                    Portfolio</a>
+                <a href="portfolio.html" class="btn-primary">Explore Portfolio</a>
             </div>
         </section>
 
-        <!-- Portfolio Section -->
-        <section id="portfolio" class="portfolio-page">
-            <h1 class="section-title" ref="portfolioTitle">Project Collection</h1>
 
-            <!-- Filter Buttons -->
-            <div class="filter-container">
-                <button v-for="cat in categories" :key="cat" @click="setFilter(cat)"
-                    :class="['filter-btn', { 'active': filterCategory === cat }]">
-                    {{ cat }}
-                </button>
-            </div>
-
-            <!-- Carousel Slider Container -->
-            <div class="portfolio-carousel-container">
-                <button class="carousel-nav-btn prev-btn" @click="scrollPrev" :disabled="currentSlide === 0"
-                    aria-label="Previous Slide">
-                    <i class="fas fa-chevron-left"></i>
-                </button>
-                <div class="portfolio-carousel-track-wrapper" ref="carouselWrapper">
-                    <div class="portfolio-carousel-track"
-                        :style="{ transform: `translateX(-${currentSlide * slideWidth}px)` }">
-                        <div v-for="(item, index) in filteredItems" :key="index" class="portfolio-card glass-panel">
-                            <div class="portfolio-thumb">
-                                <img :src="item.image" :alt="item.title">
-                            </div>
-                            <div class="portfolio-info">
-                                <span class="portfolio-category">{{ item.category }}</span>
-                                <h3 class="portfolio-title">{{ item.title }}</h3>
-                                <p class="portfolio-excerpt">{{ item.excerpt }}</p>
-                                <div class="portfolio-actions">
-                                    <button @click="openModal(item)" class="portfolio-btn-view">Details</button>
-                                    <a v-if="item.demoLink" :href="item.demoLink" target="_blank"
-                                        class="portfolio-btn-demo">Live Demo</a>
-                                    <a v-if="item.githubLink" :href="item.githubLink" target="_blank"
-                                        class="portfolio-btn-github"><i class="fab fa-github"></i> GitHub</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <button class="carousel-nav-btn next-btn" @click="scrollNext" :disabled="currentSlide >= maxSlides"
-                    aria-label="Next Slide">
-                    <i class="fas fa-chevron-right"></i>
-                </button>
-            </div>
-        </section>
-
-        <!-- Glassmorphic Modal Detail View -->
-        <div v-if="selectedItem" class="modal-overlay" @click="closeModal">
-            <div class="modal-wrapper glass-panel" @click.stop>
-                <button class="modal-close-btn" @click="closeModal">&times;</button>
-                <div class="modal-body">
-                    <img :src="selectedItem.image" :alt="selectedItem.title" class="modal-image">
-                    <div class="modal-meta">
-                        <span class="modal-tag">{{ selectedItem.category }}</span>
-                    </div>
-                    <h2 class="modal-title">{{ selectedItem.title }}</h2>
-                    <p class="modal-description" v-html="selectedItem.description"></p>
-                    <div class="modal-actions" style="display:flex; justify-content:flex-end; gap: 12px;">
-                        <a v-if="selectedItem.githubLink" :href="selectedItem.githubLink" target="_blank"
-                            class="portfolio-btn-github"
-                            style="padding: 12px 24px; font-size:14px; border-radius: 50px; display: inline-flex; align-items: center; gap: 8px; justify-content: center; text-transform: uppercase; font-family: var(--font-headings); font-weight: 700;"><i
-                                class="fab fa-github"></i> GitHub</a>
-                        <a v-if="selectedItem.demoLink" :href="selectedItem.demoLink" target="_blank"
-                            class="btn-primary"
-                            style="opacity:1; transform:none; padding: 12px 28px; font-size:14px; margin: 0;">Launch
-                            Demo</a>
-                    </div>
-                </div>
-            </div>
-        </div>
 
 
 
@@ -181,65 +109,8 @@
                     scrolled: false,
                     menuActive: false,
                     currentYear: new Date().getFullYear(),
-                    filterCategory: 'All',
-                    selectedItem: null,
-                    currentSlide: 0,
-                    slideWidth: 0,
                     isMobile: false,
-                    activeSection: 'home',
-                    categories: ['All', 'Machine Learning', 'Security & Cryptography', 'AI & Data Science'],
-                    portfolioItems: [
-                        {
-                            title: '十大機器學習演算法互動學習平台',
-                            category: 'Machine Learning',
-                            image: 'img/top10ml-thumb.png',
-                            excerpt: '本專案將 24MB 包含大量圖片的靜態報告，成功重構並轉換為 Next.js 與 FastAPI 架構的動態互動式機器學習學習平台。',
-                            description: '本專案將一個 <strong>24MB 包含大量 Base64 嵌入圖片的靜態 HTML 研讀報告</strong>，成功重構並轉換為一個現代化、響應式且具備實時演算法運算能力的<strong>動態互動式機器學習學習平台</strong>。<br><br>平台採用 <strong>Next.js (前端)</strong> 與 <strong>FastAPI (後端)</strong> 架構，讓學習者不僅能閱讀理論，還能直接在瀏覽器中調整超參數，即時觀測 Scikit-learn 模型在二維空間中擬合的<strong>決策面 (Decision Boundary)</strong> 與評估指標變動。',
-                            demoLink: 'https://top10mlalgorithm.vercel.app/',
-                            githubLink: 'https://github.com/bigkuan-chen/top10mlalgorithm'
-                        },
-                        {
-                            title: 'BigCanVault v2 - Web Password Vault Manager',
-                            category: 'Security & Cryptography',
-                            image: 'img/vault-thumb.png',
-                            excerpt: '一個最先進的、零知識 (Zero-Knowledge) 的網頁密碼管理器，使用 WebAssembly (libsodium) 加密並以個人的 Google Drive 作為雲端儲存空間。',
-                            description: 'BigCanVault v2 是一個最先進的、零知識 (Zero-Knowledge) 的網頁密碼管理器。基於 <strong>Next.js</strong>、<strong>TypeScript</strong> 與 <strong>libsodium-wrappers-sumo (WebAssembly)</strong> 開發，並以使用者個人的 <strong>Google Drive</strong> 作為加密資料儲存空間。<br><br>所有密鑰衍生、加解密流程皆在瀏覽器端 (Client-side) 完成，確保伺服器端（如 Vercel）絕不經手任何明文密碼或主金鑰。',
-                            demoLink: 'https://bigcanvault-v2-git-main-eaglechen-9925s-projects.vercel.app/',
-                            githubLink: 'https://github.com/bigkuan-chen/bigcanvault_v2'
-                        },
-                        {
-                            title: 'AI WordPilot - 智慧英文單字學習系統',
-                            category: 'AI & Data Science',
-                            image: 'img/ai-wordpilot-thumb.png',
-                            excerpt: '結合 Google Gemini 語意分析與間隔重複（Spaced Repetition）演算法的智慧英文單字學習系統。',
-                            description: 'AI WordPilot 是一款結合 <strong>Google Gemini 語意分析</strong>與<strong>間隔重複（Spaced Repetition）演算法</strong>的智慧英文單字學習系統，專為提升單字記憶效率設計。<br><br><strong>核心功能特色：</strong><br>• <strong>AI 智慧單字查詢與解析</strong>：雙語詳細釋義、CEFR 難度分級、詞頻統計、語音朗讀（TTS）及相似與混淆字彙語境對比。<br>• <strong>我的單字與混淆字對比收藏</strong>：打造個人專屬單字庫與對比卡片。<br>• <strong>加權間隔重複複習系統</strong>：結合 SuperMemo-2 (SM2) 演算法設計，提供英翻中、中翻英、情境選字、相似字辨識等四種智慧題型，並依據自評記憶回饋動態調整複習天數，達到最高記憶維持率。<br>• <strong>現代跨平台架構</strong>：使用 <strong>Flutter & Riverpod</strong> 開發，Web 端支援 SharedPreferences 本地持久化快取，並整合 Google Gemini API 生成結構化單字資料。',
-                            demoLink: 'https://ai-eng-axhwj6whw-eaglechen-9925s-projects.vercel.app/',
-                            githubLink: 'https://github.com/bigkuan-chen/AIEngDic'
-                        },
-                        {
-                            title: '圖書向量資料庫查詢與匯入系統',
-                            category: 'AI & Data Science',
-                            image: 'img/books-vector-thumb.png',
-                            excerpt: '基於 FastAPI 與 Next.js 的兩階段檢索（Retrieve & Rerank）圖書向量資料庫查詢與匯入系統，支援 Qdrant 向量檢索與 LLM 重新排序。',
-                            description: '圖書向量資料庫查詢與匯入系統是一個結合語意搜尋與大語言模型評估的現代化圖書檢索平台。<br><br><strong>核心功能特色：</strong><br>• <strong>圖書向量資料庫匯入</strong>：支援上傳書籍 JSON 檔案，進行資料前置驗證（ISBN 重複、欄位完整性），並設定重複處理原則以批次匯入至 Qdrant 向量資料庫。<br>• <strong>自然語言語意檢索</strong>：利用 Sentence-Transformers 將查詢文本向量化，並透過 Qdrant 進行餘弦相似度模糊比對。<br>• <strong>中介資料精確篩選</strong>：支援針對語言、出版社、出版年份範圍與主題標籤的混合式中介資料篩選（Metadata Filtering）。<br>• <strong>LLM 重新排序與過濾 (Reranking)</strong>：將第一階段粗篩的候選書籍與使用者查詢傳送給 LLM 進行二次精確相關度評分，排除未達最低門檻的圖書並調整最終重排。<br>• <strong>詳細查詢統計與偵錯</strong>：以視覺化比例條展示向量檢索與 LLM 處理的耗時佔比，並提供 Debug 面板檢視系統提示詞、模型輸入與原始輸出以利開發調優。<br>• <strong>現代技術架構</strong>：後端採用 <strong>FastAPI & Qdrant</strong>，前端使用 <strong>Next.js (App Router) & Tailwind CSS</strong> 開發，支援 Docker Compose 容器化部署。',
-                            demoLink: 'https://books-vector-system.vercel.app/book-search',
-                            githubLink: 'https://github.com/bigkuan-chen/books_vector_system'
-                        }
-                    ]
-                }
-            },
-            computed: {
-                filteredItems() {
-                    if (this.filterCategory === 'All') {
-                        return this.portfolioItems;
-                    }
-                    return this.portfolioItems.filter(item => item.category === this.filterCategory);
-                },
-                maxSlides() {
-                    const items = this.filteredItems;
-                    if (!items.length) return 0;
-                    const visibleCards = this.isMobile ? 1 : 2;
-                    return Math.max(0, items.length - visibleCards);
+                    activeSection: 'home'
                 }
             },
             methods: {
@@ -258,7 +129,7 @@
                     }
                 },
                 checkActiveSection() {
-                    const sections = ['home', 'portfolio', 'contact'];
+                    const sections = ['home', 'contact'];
                     const scrollPosition = window.scrollY + window.innerHeight / 3;
 
                     for (const sectionId of sections) {
@@ -273,41 +144,8 @@
                         }
                     }
                 },
-                setFilter(category) {
-                    this.filterCategory = category;
-                    this.currentSlide = 0;
-                    this.$nextTick(() => {
-                        this.updateSlideWidth();
-                        this.animateCards();
-                    });
-                },
-                openModal(item) {
-                    this.selectedItem = item;
-                    document.body.style.overflow = 'hidden';
-                },
-                closeModal() {
-                    this.selectedItem = null;
-                    document.body.style.overflow = 'auto';
-                },
-                scrollPrev() {
-                    if (this.currentSlide > 0) {
-                        this.currentSlide--;
-                    }
-                },
-                scrollNext() {
-                    if (this.currentSlide < this.maxSlides) {
-                        this.currentSlide++;
-                    }
-                },
-                updateSlideWidth() {
-                    const card = this.$refs.carouselWrapper?.querySelector('.portfolio-card');
-                    if (card) {
-                        this.slideWidth = card.offsetWidth + 28; // Keep this in sync with the carousel gap in CSS.
-                    }
-                },
                 handleResize() {
                     this.isMobile = window.innerWidth <= 768;
-                    this.updateSlideWidth();
                 },
                 animateEmail() {
                     gsap.to(this.$refs.emailLink, {
@@ -325,19 +163,7 @@
                         ease: "power2.out"
                     });
                 },
-                animateCards() {
-                    gsap.fromTo('.portfolio-card',
-                        { opacity: 0, scale: 0.9, y: 30 },
-                        {
-                            opacity: 1,
-                            scale: 1,
-                            y: 0,
-                            duration: 0.6,
-                            stagger: 0.1,
-                            ease: "power2.out"
-                        }
-                    );
-                },
+
                 initAnimations() {
                     gsap.registerPlugin(ScrollTrigger);
 
@@ -365,18 +191,7 @@
                         ease: "power3.out"
                     });
 
-                    // Portfolio title animation
-                    gsap.from(this.$refs.portfolioTitle, {
-                        opacity: 0,
-                        y: -30,
-                        duration: 0.8,
-                        ease: "power3.out",
-                        scrollTrigger: {
-                            trigger: '#portfolio',
-                            start: 'top bottom-=100',
-                            toggleActions: 'play none none reverse'
-                        }
-                    });
+
 
 
 
@@ -402,7 +217,6 @@
                 this.$nextTick(() => {
                     this.handleResize();
                     this.initAnimations();
-                    this.animateCards();
                 });
             },
             unmounted() {

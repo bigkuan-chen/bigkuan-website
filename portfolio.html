@@ -21,12 +21,13 @@
         <header :class="{ 'scrolled': scrolled }">
             <nav>
                 <a href="index.html#home" class="logo">
-                    <img src="img/can-icon.svg" alt="Can Logo" style="height: 32px; width: 32px; vertical-align: middle; margin-right: 8px;">
+                    <img src="img/can-icon.svg" alt="Can Logo"
+                        style="height: 32px; width: 32px; vertical-align: middle; margin-right: 8px;">
                     Big Kuan
                 </a>
                 <ul class="nav-links" :class="{ 'active': menuActive }">
                     <li><a href="index.html#home">Home</a></li>
-                    <li><a href="index.html#portfolio" class="active">Portfolio</a></li>
+                    <li><a href="portfolio.html" class="active">Portfolio</a></li>
                     <li><a href="about.html">About</a></li>
                     <li><a href="index.html#contact">Contact</a></li>
                 </ul>
@@ -84,10 +85,12 @@
                     <div class="modal-actions" style="display:flex; justify-content:flex-end; gap: 12px;">
                         <a v-if="selectedItem.githubLink" :href="selectedItem.githubLink" target="_blank"
                             class="portfolio-btn-github"
-                            style="padding: 12px 24px; font-size:14px; border-radius: 50px; display: inline-flex; align-items: center; gap: 8px; justify-content: center; text-transform: uppercase; font-family: var(--font-headings); font-weight: 700;"><i class="fab fa-github"></i> GitHub</a>
+                            style="padding: 12px 24px; font-size:14px; border-radius: 50px; display: inline-flex; align-items: center; gap: 8px; justify-content: center; text-transform: uppercase; font-family: var(--font-headings); font-weight: 700;"><i
+                                class="fab fa-github"></i> GitHub</a>
                         <a v-if="selectedItem.demoLink" :href="selectedItem.demoLink" target="_blank"
                             class="btn-primary"
-                            style="opacity:1; transform:none; padding: 12px 28px; font-size:14px; margin: 0;">Launch Demo</a>
+                            style="opacity:1; transform:none; padding: 12px 28px; font-size:14px; margin: 0;">Launch
+                            Demo</a>
                     </div>
                 </div>
             </div>
@@ -95,11 +98,11 @@
 
         <!-- Footer -->
         <footer>
-            <div class="footer-socials">
+            <!-- <div class="footer-socials">
                 <a href="https://github.com/bigkuan-chen" target="_blank"><i class="fab fa-github"></i></a>
                 <a href="https://linkedin.com" target="_blank"><i class="fab fa-linkedin"></i></a>
                 <a href="mailto:eagle.chen@gmail.com"><i class="fas fa-envelope"></i></a>
-            </div>
+            </div> -->
             <p>&copy; {{ currentYear }} by CHEN KUAN LIANG. All rights reserved.</p>
         </footer>
     </div>
