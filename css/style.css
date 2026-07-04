@@ -951,11 +951,11 @@ nav {
 
 .skills-wrapper h3 {
     font-size: 22px;
-    margin-bottom: 24px;
+    margin-bottom: 22px;
 }
 
 .skill-category {
-    margin-bottom: 24px;
+    margin-bottom: 26px;
 }
 
 .skill-category-title {
@@ -968,27 +968,29 @@ nav {
 }
 
 .skill-tags {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 8px 24px;
+    padding-left: 18px;
 }
 
 .skill-tag {
-    padding: 8px 14px;
-    background: #ffffff;
-    border: 1px solid var(--border-glass);
-    border-radius: 8px;
-    font-size: 14px;
-    font-weight: 600;
+    display: list-item;
+    padding: 0;
+    background: transparent;
+    border: 0;
+    border-radius: 0;
+    font-size: 15px;
+    font-weight: 500;
     color: var(--text-secondary);
-    transition: var(--transition-smooth);
+    line-height: 1.7;
+    opacity: 1 !important;
+    transform: none !important;
+    transition: color 0.2s ease;
 }
 
 .skill-tag:hover {
-    background: rgba(14, 165, 233, 0.08);
-    border-color: rgba(14, 165, 233, 0.28);
     color: #0369a1;
-    transform: translateY(-2px);
 }
 
 .contact-page {
