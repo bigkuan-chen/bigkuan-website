@@ -21,13 +21,14 @@
         <header :class="{ 'scrolled': scrolled }">
             <nav>
                 <a href="index.html#home" class="logo">
-                    <img src="img/can-icon.svg" alt="Can Logo" style="height: 32px; width: 32px; vertical-align: middle; margin-right: 8px;">
+                    <img src="img/can-icon.svg" alt="Can Logo"
+                        style="height: 32px; width: 32px; vertical-align: middle; margin-right: 8px;">
                     Big Kuan
                 </a>
                 <ul class="nav-links" :class="{ 'active': menuActive }">
                     <li><a href="index.html#home">Home</a></li>
                     <li><a href="index.html#portfolio">Portfolio</a></li>
-                    <li><a href="index.html#about" class="active">About</a></li>
+                    <li><a href="about.html" class="active">About</a></li>
                     <li><a href="index.html#contact">Contact</a></li>
                 </ul>
                 <div class="menu-toggle" @click="toggleMenu">
@@ -52,18 +53,20 @@
                 <!-- Right Column: Biography & Skills -->
                 <div class="about-text" ref="textCol">
                     <h2>Hello, I'm a Senior Software Engineer & System Architect</h2>
-                    <p>歡迎來到我的個人作品空間。我是一位深耕新竹科學園區的資深軟體工程師，具備近二十年的企業系統開發經驗，專長涵蓋程式開發、系統分析（SA）、系統設計（SD）、資料庫開發與企業流程整合，是一位能同時兼顧技術實作與系統架構的全方位工程師。</p>
+                    <p>歡迎來到我的個人作品空間。我是一位深耕新竹科學園區的資深軟體工程師，具備近二十年的企業系統開發經驗，專長涵蓋程式開發、系統分析（SA）、系統設計（SD）、資料庫開發與企業流程整合，是一位能同時兼顧技術實作與系統架構的全方位工程師。
+                    </p>
                     <p>我的職涯橫跨 Workflow、ERP、資料庫程式設計。我擅長將複雜的企業需求，轉化為清楚的系統規格、具整合性與可擴充性的系統架構。</p>
                     <p>在專案開發過程中，我不只負責程式撰寫，也參與需求訪談、流程分析、系統設計、資料表規劃、Business Logic 開發與文件規格撰寫，能從完整軟體生命週期的角度思考與解決問題。</p>
                     <p>工作之外，我熱衷於羽球與登山。這些運動讓我維持良好的體能、穩定的心理素質與持續的專注力，使我在面對高壓的開發環境、複雜的系統問題與長時間的系統維運時，依然能保持良好的續航力與抗壓性。</p>
-                    <p>我熱愛學習新技術，並持續關注人工智慧、機器學習與資料分析等領域的發展。目前正在國立中興大學進修 Python 相關的 AI 人工智慧與數據分析應用課程，透過系統化的學習，強化 Python 程式設計、資料處理、資料視覺化、機器學習模型與實務專題開發能力。</p>
+                    <p>我熱愛學習新技術，並持續關注人工智慧、機器學習與資料分析等領域的發展。目前正在國立中興大學進修 Python 相關的 AI 人工智慧與數據分析應用課程，透過系統化的學習，強化 Python
+                        程式設計、資料處理、資料視覺化、機器學習模型與實務專題開發能力。</p>
 
                     <!-- Technical Skills Wrapper -->
                     <div class="skills-wrapper">
                         <h3>Technical Skills</h3>
 
                         <div class="skill-category">
-                            <h4 class="skill-category-title">Core Development</h4>
+                            <h4 class="skill-category-title">Core Development Skills</h4>
                             <div class="skill-tags">
                                 <span class="skill-tag">Java</span>
                                 <span class="skill-tag">Spring Boot</span>
@@ -73,8 +76,9 @@
                                 <span class="skill-tag">HTML5</span>
                                 <span class="skill-tag">CSS3</span>
                                 <span class="skill-tag">JavaScript</span>
-                                <span class="skill-tag">Object-Oriented Programming</span>
-                                <span class="skill-tag">Business Logic Development</span>
+                                <span class="skill-tag">Python</span>
+                                <span class="skill-tag">Oracle Developer 2000</span>
+                                <span class="skill-tag">Delphi</span>
                             </div>
                         </div>
 
@@ -98,38 +102,17 @@
                             <div class="skill-tags">
                                 <span class="skill-tag">Oracle Database</span>
                                 <span class="skill-tag">PL/SQL</span>
-                                <span class="skill-tag">Oracle Developer 2000</span>
-                                <span class="skill-tag">ERP 系統開發</span>
+                                <span class="skill-tag">MS SQL SEVER</span>
                                 <span class="skill-tag">資料表結構設計</span>
                                 <span class="skill-tag">SQL 查詢與效能調整</span>
                                 <span class="skill-tag">報表開發</span>
-                                <span class="skill-tag">舊系統維護</span>
                             </div>
                         </div>
 
                         <div class="skill-category">
-                            <h4 class="skill-category-title">Workflow & System Modernization</h4>
+                            <h4 class="skill-category-title">Others</h4>
                             <div class="skill-tags">
-                                <span class="skill-tag">Workflow Engine 開發</span>
-                                <span class="skill-tag">Workflow 表單開發</span>
-                                <span class="skill-tag">ASP 系統轉換</span>
-                                <span class="skill-tag">Java Web 系統開發</span>
-                                <span class="skill-tag">舊系統現代化</span>
-                                <span class="skill-tag">系統整合</span>
-                                <span class="skill-tag">企業流程自動化</span>
-                                <span class="skill-tag">正式環境系統維運</span>
-                            </div>
-                        </div>
-
-                        <div class="skill-category">
-                            <h4 class="skill-category-title">Business Intelligence & Tools</h4>
-                            <div class="skill-tags">
-                                <span class="skill-tag">Microsoft SSIS</span>
-                                <span class="skill-tag">Microsoft SSAS</span>
-                                <span class="skill-tag">銷售資料分析</span>
-                                <span class="skill-tag">管理報表設計</span>
                                 <span class="skill-tag">Git</span>
-                                <span class="skill-tag">GitHub</span>
                                 <span class="skill-tag">Docker</span>
                             </div>
                         </div>
