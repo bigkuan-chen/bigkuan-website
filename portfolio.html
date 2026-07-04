@@ -39,7 +39,6 @@
 
         <!-- Main Content -->
         <main class="portfolio-page">
-            <h1 class="section-title" ref="pageTitle">Project Collection</h1>
 
             <!-- Filter Buttons -->
             <div class="filter-container">
@@ -209,14 +208,6 @@
                     );
                 },
                 initAnimations() {
-                    // Title and filter entrance animation
-                    gsap.from(this.$refs.pageTitle, {
-                        opacity: 0,
-                        y: -30,
-                        duration: 0.8,
-                        ease: "power3.out"
-                    });
-
                     // Trigger card list animation
                     this.animateCards();
                 }
