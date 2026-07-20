@@ -138,8 +138,8 @@
                             title: 'BigCanVault v2 - Web Password Vault Manager',
                             category: 'Security and Cryptography',
                             image: 'img/vault-thumb.png',
-                            excerpt: '一個最先進的、零知識 (Zero-Knowledge) 的網頁密碼管理器，使用 WebAssembly (libsodium) 加密並以個人的 Google Drive 作為雲端儲存空間。',
-                            description: 'BigCanVault v2 是一個最先進的、零知識 (Zero-Knowledge) 的網頁密碼管理器。基於 <strong>Next.js</strong>、<strong>TypeScript</strong> 與 <strong>libsodium-wrappers-sumo (WebAssembly)</strong> 開發，並以使用者個人的 <strong>Google Drive</strong> 作為加密資料儲存空間。<br><br>所有密鑰衍生、加解密流程皆在瀏覽器端 (Client-side) 完成，確保伺服器端（如 Vercel）絕不經手任何明文密碼或主金鑰。',
+                            excerpt: '一個最先進的的網頁密碼管理器，使用 WebAssembly (libsodium) 加密並以個人的 Google Drive 作為雲端儲存空間。',
+                            description: 'BigCanVault v2 是一個最先進的的網頁密碼管理器。基於 <strong>Next.js</strong>、<strong>TypeScript</strong> 與 <strong>libsodium-wrappers-sumo (WebAssembly)</strong> 開發，並以使用者個人的 <strong>Google Drive</strong> 作為加密資料儲存空間。<br><br>所有密鑰衍生、加解密流程皆在瀏覽器端 (Client-side) 完成，確保伺服器端（如 Vercel）絕不經手任何明文密碼或主金鑰。<br><br><strong>核心加密與安全機制：</strong><br>• <strong>金鑰衍生 (KDF)</strong>：使用 <strong>Argon2id</strong> 演算法 (<code>crypto_pwhash</code>)。隨機鹽值 (Salt) 為 16 bytes，操作限制 (Opslimit) 為 2，記憶體限制 (Memlimit) 為 64MB。採用 <code>libsodium-wrappers-sumo</code> 於瀏覽器 WebAssembly 環境中高效執行金鑰衍生。<br>• <strong>對稱加密 (AEAD)</strong>：採用 <strong>XChaCha20-Poly1305</strong> 演算法 (<code>crypto_aead_xchacha20poly1305_ietf_encrypt</code>)。每次存檔皆重新生成 24 bytes 的隨機隨機數 (Nonce)，確保極致的資料機密性與完整性。<br>• <strong>帳號雜湊與驗證</strong>：使用 <strong>SHA-256</strong> 對標準化的帳號進行雜湊處理，作為密碼庫的擁有者識別碼。<br>• <strong>Google Drive 隱私防護</strong>：使用 <code>drive.appdata</code> 權限範圍，僅能存取該帳號底下由應用程式建立的隱藏資料空間 (Application Data Folder)，防止用戶誤刪檔案。同時具備覆蓋驗證保護 (Overwrite Protection) 與備份匯入校驗機制。',
                             demoLink: 'https://bigcanvault-v2-git-main-eaglechen-9925s-projects.vercel.app/',
                             githubLink: 'https://github.com/bigkuan-chen/bigcanvault_v2'
                         },
@@ -147,8 +147,8 @@
                             title: 'AI WordPilot - 智慧英文單字學習系統',
                             category: 'AI and Data Science',
                             image: 'img/ai-wordpilot-thumb.png',
-                            excerpt: '結合 Google Gemini 語意分析與間隔重複（Spaced Repetition）演算法的智慧英文單字學習系統。',
-                            description: 'AI WordPilot 是一款結合 <strong>Google Gemini 語意分析</strong>與<strong>間隔重複（Spaced Repetition）演算法</strong>的智慧英文單字學習系統，專為提升單字記憶效率設計。<br><br><strong>核心功能特色：</strong><br>• <strong>AI 智慧單字查詢與解析</strong>：雙語詳細釋義、CEFR 難度分級、詞頻統計、語音朗讀（TTS）及相似與混淆字彙語境對比。<br>• <strong>我的單字與混淆字對比收藏</strong>：打造個人專屬單字庫與對比卡片。<br>• <strong>加權間隔重複複習系統</strong>：結合 SuperMemo-2 (SM2) 演算法設計，提供英翻中、中翻英、情境選字、相似字辨識等四種智慧題型，並依據自評記憶回饋動態調整複習天數，達到最高記憶維持率。<br>• <strong>現代跨平台架構</strong>：使用 <strong>Flutter & Riverpod</strong> 開發，Web 端支援 SharedPreferences 本地持久化快取，並整合 Google Gemini API 生成結構化單字資料。',
+                            excerpt: '結合大語言模型(LLM)的語意分析與間隔重複（Spaced Repetition）演算法的智慧英文單字學習系統。',
+                            description: 'AI WordPilot 是一款結合 <strong>大語言模型(LLM)語意分析</strong>與<strong>間隔重複（Spaced Repetition）演算法</strong>的智慧英文單字學習系統，專為提升單字記憶效率設計。<br><br><strong>核心功能特色：</strong><br>• <strong>AI 智慧單字查詢與解析</strong>：雙語詳細釋義、CEFR 難度分級、詞頻統計、語音朗讀（TTS）及相似與混淆字彙語境對比。<br>• <strong>我的單字與混淆字對比收藏</strong>：打造個人專屬單字庫與對比卡片。<br>• <strong>加權間隔重複複習系統</strong>：結合 SuperMemo-2 (SM2) 演算法設計，提供英翻中、中翻英、情境選字、相似字辨識等四種智慧題型，並依據自評記憶回饋動態調整複習天數，達到最高記憶維持率。<br>• <strong>現代跨平台架構</strong>：使用 <strong>Flutter & Riverpod</strong> 開發，Web 端支援 SharedPreferences 本地持久化快取，並整合 Google Gemini API 生成結構化單字資料。',
                             demoLink: 'https://ai-eng-axhwj6whw-eaglechen-9925s-projects.vercel.app/',
                             githubLink: 'https://github.com/bigkuan-chen/AIEngDic'
                         },
