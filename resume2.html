@@ -186,7 +186,7 @@
       z-index: 0;
       top: 12%;
       right: 0;
-      bottom: 14%;
+      bottom: 0;
       left: 0;
       border-radius: 0;
       background: var(--resume-band);
@@ -484,25 +484,69 @@
     }
 
     /* Increase every type level in the right-hand content by one step. */
-    .content .hero .eyebrow { font-size: 11px; }
-    .content .hero h1 { font-size: clamp(38px, 5.2vw, 57px); }
-    .content .hero .english-name { font-size: 17px; }
-    .content .hero h2 { font-size: 14px; }
-    .content .tag-row span { font-size: 11px; }
+    .content .hero .eyebrow {
+      font-size: 11px;
+    }
+
+    .content .hero h1 {
+      font-size: clamp(38px, 5.2vw, 57px);
+    }
+
+    .content .hero .english-name {
+      font-size: 17px;
+    }
+
+    .content .hero h2 {
+      font-size: 14px;
+    }
+
+    .content .tag-row span {
+      font-size: 11px;
+    }
+
     .content .main-section h2,
-    .content .card h2 { font-size: 20px; }
+    .content .card h2 {
+      font-size: 20px;
+    }
+
     .content .profile-section,
-    .content .profile-section p { font-size: 14px; }
-    .content .job-meta { font-size: 13.5px; }
-    .content .job h3 { font-size: 15px; }
-    .content .job h4 { font-size: 12px; }
-    .content .job .location { font-size: 11px; }
+    .content .profile-section p {
+      font-size: 14px;
+    }
+
+    .content .job-meta {
+      font-size: 13.5px;
+    }
+
+    .content .job h3 {
+      font-size: 15px;
+    }
+
+    .content .job h4 {
+      font-size: 12px;
+    }
+
+    .content .job .location {
+      font-size: 11px;
+    }
+
     .content .job p,
-    .content .job li { font-size: 12.5px; }
-    .content .education-item strong { font-size: 15px; }
+    .content .job li {
+      font-size: 12.5px;
+    }
+
+    .content .education-item strong {
+      font-size: 15px;
+    }
+
     .content .education-item span,
-    .content .education-item small { font-size: 12px; }
-    .content .strength-list span { font-size: 11px; }
+    .content .education-item small {
+      font-size: 12px;
+    }
+
+    .content .strength-list span {
+      font-size: 11px;
+    }
 
     @media (max-width: 760px) {
       body.resume-body {
@@ -863,7 +907,7 @@
               </tr>
               <tr>
                 <td>Bootstrap</td>
-                <td></td>
+                <td>D2K</td>
               </tr>
             </tbody>
           </table>
@@ -880,12 +924,16 @@
                 <td>PL/SQL</td>
                 <td colspan="2">SQL Optimization</td>
               </tr>
-              <tr>
+              <tr style="display: none;">
                 <td colspan="3">Oracle Developer 2000</td>
               </tr>
               <tr>
-                <td>報表開發</td>
-                <td colspan="2">資料表結構設計</td>
+                <td>MS SSIS</td>
+                <td colspan="2">MS SSAS</td>
+              </tr>
+              <tr>
+                <td colspan="2">Crystal Report</td>
+                <td></td>
               </tr>
             </tbody>
           </table>
@@ -919,7 +967,6 @@
         <p class="eyebrow">SENIOR SOFTWARE ENGINEER · SYSTEM ANALYST/DESIGN · PROJECT LEAD</p>
         <h1>陳冠良</h1>
         <p class="english-name">KUAN-LIANG CHEN</p>
-        <p></p>
         <h2>資深軟體工程師｜系統分析/設計｜專案管理 | AI應用工程師</h2>
         <div class="tag-row" style="display: none;">
           <span>ERP</span><span>Workflow</span><span>SA / SD</span><span>AI Development</span>
