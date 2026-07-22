@@ -123,7 +123,7 @@
                     currentYear: new Date().getFullYear(),
                     filterCategory: 'All',
                     selectedItem: null,
-                    categories: ['All', 'Machine Learning', 'Security and Cryptography', 'AI and Data Science'],
+                    categories: ['All', 'Machine Learning', 'Security and Cryptography', 'AI and Data Science', 'Automation and Tools'],
                     portfolioItems: [
                         {
                             title: '十大機器學習演算法互動學習平台',
@@ -157,9 +157,18 @@
                             category: 'AI and Data Science',
                             image: 'img/books-vector-thumb.png',
                             excerpt: '基於 FastAPI 與 Next.js 的兩階段檢索（Retrieve & Rerank）圖書向量資料庫查詢與匯入系統，支援 Qdrant 向量檢索與 LLM 重新排序。',
-                            description: '圖書向量資料庫查詢與匯入系統是一個結合語意搜尋與大語言模型評估的現代化圖書檢索平台。<br><br><strong>核心功能特色：</strong><br>• <strong>圖書向量資料庫匯入</strong>：支援上傳書籍 JSON 檔案，進行資料前置驗證（ISBN 重複、欄位完整性），並設定重複處理原則以批次匯入至 Qdrant 向量資料庫。<br>• <strong>自然語言語意檢索</strong>：利用 Sentence-Transformers 將查詢文本向量化，並透過 Qdrant 進行餘弦相似度模糊比對。<br>• <strong>中介資料精確篩選</strong>：支援針對語言、出版社、出版年份範圍與主題標籤的混合式中介資料篩選（Metadata Filtering）。<br>• <strong>LLM 重新排序與過濾 (Reranking)</strong>：將第一階段粗篩的候選書籍與使用者查詢傳送給 LLM 進行二次精確相關度評分，排除未達最低門檻的圖書並調整最終重排。<br>• <strong>詳細查詢統計與偵錯</strong>：以視覺化比例條展示向量檢索與 LLM 處理的耗時佔比，並提供 Debug 面板檢視系統提示詞、模型輸入與原始輸出以利開發調優。<br>• <strong>現代技術架構</strong>：後端採用 <strong>FastAPI & Qdrant</strong>，前端使用 <strong>Next.js (App Router) & Tailwind CSS</strong> 開發，支援 Docker Compose 容器化部署。',
+                            description: '圖書向量資料庫查詢與匯入系統是一個結合語意搜尋與大語言模型評估的現代化圖書檢索平台。<br><br><strong>核心功能特色：</strong><br>• <strong>圖書向量資料庫匯入</strong>：支援上傳書籍 JSON 檔案，進行資料前置驗證（ISBN 重複、欄位完整性），並設定重複處理原則以批次匯入至 Qdrant 向量資料庫。<br>• <strong>自然語言語意檢索</strong>：利用 Sentence-Transformers 將查詢文本向量化，並透過 Qdrant 進行餘弦相似度模糊比對。<br>• <strong>中介資料精確篩選</strong>：支援針對語言、出版社、出版年份範圍與主題標籤的混合式中介資料篩選（Metadata Filtering）。<br>• <strong>LLM 重新排序與過濾 (Reranking)</strong>：將第一階段粗篩的候選書籍與使用者查詢傳送給 LLM 進行二次精確相關度評分，排除未達最低門檻的圖書並調整最終重排。<br>• <strong>詳細查詢統計與偵錯</strong>：以視覺化比例條展示向量檢索與 LLM 處理的防時佔比，並提供 Debug 面板檢視系統提示詞、模型輸入與原始輸出以利開發調優。<br>• <strong>現代技術架構</strong>：後端採用 <strong>FastAPI & Qdrant</strong>，前端使用 <strong>Next.js (App Router) & Tailwind CSS</strong> 開發，支援 Docker Compose 容器化部署。',
                             demoLink: 'https://books-vector-system.vercel.app/book-search',
                             githubLink: 'https://github.com/bigkuan-chen/books_vector_system'
+                        },
+                        {
+                            title: 'Google Flights 機票降價追蹤通知器',
+                            category: 'Automation and Tools',
+                            image: 'img/flights-freedom-thumb.jpg',
+                            excerpt: '基於 Python、SerpApi (Google Flights) 與 LINE / Brevo API 的機票降價監控與自動通知系統，支援彈性區間搜尋與 GitHub Actions 自動化排程。',
+                            description: 'Google Flights 機票降價追蹤通知器是一款基於 <strong>Python</strong> 開發的機票降價監控與自動通知系統。<br><br><strong>核心功能特色：</strong><br>• <strong>彈性雙重搜尋模式</strong>：支援「單一日期」去回程追蹤與「區間彈性搜尋模式」（可設定長日期區間與旅遊天數，自動排列所有起迄組合，進行批量票價查詢與最低價排序推薦）。<br>• <strong>歷史票價追蹤與比對</strong>：整合本地 <strong>SQLite 資料庫</strong> 記錄每次查詢票價與連結，自動與同日期組合之歷史最低票價比對，精準判斷降價幅度。<br>• <strong>雙通道自動推播通知</strong>：當查得票價低於預設「理想預算」或低於「歷史最低價」時，自動透過 <strong>LINE Messaging API</strong> 推送私訊警報，並透過 <strong>Brevo (Sendinblue) Email API</strong> 發送精美的 HTML 格式化降價通知信。<br>• <strong>GitHub Actions 雲端自動化執行</strong>：支援設定定時排程（Cron Job），免用實體主機，自動運行並將更新後的 SQLite 資料庫提交回存至 GitHub 專案。',
+                            demoLink: '',
+                            githubLink: 'https://github.com/bigkuan-chen/flights_freedom'
                         }
                     ]
                 }
