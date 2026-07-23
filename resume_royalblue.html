@@ -1,0 +1,1098 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>陳冠良｜資深軟體工程師履歷</title>
+  <!-- Version 2 uses an isolated stylesheet so the panel colours stay consistent. -->
+  <style>
+    /* Resume template v2 — inspired by the supplied editorial two-column layout. */
+    :root {
+      --resume-ink: #17345f;
+      --resume-muted: #6f82a3;
+      --resume-sage: #1947a3;
+      --resume-band: #dbe7ff;
+      --resume-paper: #f7f9fd;
+      --resume-white: #ffffff;
+      --resume-radius: 18px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body.resume-body {
+      margin: 0;
+      padding: 36px 16px;
+      background: #d9e1ef;
+      color: var(--resume-ink);
+      font-family: "Trebuchet MS", Arial, sans-serif;
+      line-height: 1.35;
+    }
+
+    .resume-page {
+      width: min(100%, 210mm);
+      min-height: 297mm;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 64mm 146mm;
+      overflow: hidden;
+      border-radius: 24px;
+      background: var(--resume-paper);
+      box-shadow: 0 18px 55px rgba(23, 52, 95, .2);
+    }
+
+    .sidebar {
+      grid-column: 1;
+      grid-row: 1;
+      padding: 38px 24px 44px;
+      border-radius: var(--resume-radius);
+      background: var(--resume-sage);
+      color: var(--resume-white);
+    }
+
+    .portrait-wrap {
+      position: relative;
+      z-index: 2;
+      width: 45mm;
+      height: 45mm;
+      margin: 0 auto 1mm;
+      overflow: hidden;
+      border: 2.2mm solid rgba(255, 255, 255, .92);
+      border-radius: 50%;
+      background: #fff;
+    }
+
+    .portrait {
+      width: 100%;
+      height: 100%;
+      display: block;
+      object-fit: contain;
+      object-position: 50% 0;
+      transform: scale(.9702);
+      transform-origin: center;
+    }
+
+    .side-section {
+      margin: 0 0 28px;
+      background: transparent;
+    }
+
+    .side-section h2,
+    .main-section h2,
+    .card h2 {
+      margin: 0;
+      color: var(--resume-ink);
+      font-size: 19px;
+      font-weight: 800;
+      letter-spacing: .02em;
+    }
+
+    .side-section h2 {
+      color: #dce7ff;
+    }
+
+    .side-rule {
+      width: 100%;
+      height: 2px;
+      margin: 8px 0 13px;
+      background: rgba(255, 255, 255, .55);
+    }
+
+    .side-section p,
+    .side-section li {
+      font-size: 12.5px;
+      letter-spacing: .06em;
+    }
+
+    .side-section ul {
+      margin: 8px 0 0;
+      padding-left: 18px;
+    }
+
+    .side-section li {
+      margin: 4px 0;
+    }
+
+    .contact p {
+      display: grid;
+      gap: 1px;
+      margin: 0 0 10px;
+      overflow-wrap: anywhere;
+    }
+
+    .contact strong,
+    .skill-group h3 {
+      color: #c8d8fa;
+      font-size: 12px;
+      text-transform: uppercase;
+    }
+
+    .contact span {
+      color: var(--resume-white);
+    }
+
+    .contact a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .contact a:hover {
+      text-decoration: underline;
+      color: #c8d8fa;
+    }
+
+    .skill-group {
+      margin-top: 14px;
+    }
+
+    .skill-group h3 {
+      margin: 0 0 5px;
+    }
+
+    .skill-group p {
+      margin: 0;
+    }
+
+    .skill-table {
+      width: 100%;
+      table-layout: fixed;
+      border-collapse: collapse;
+      color: var(--resume-white);
+      font-size: 12.5px;
+      line-height: 1.4;
+      letter-spacing: .02em;
+    }
+
+    .skill-table td {
+      padding: 1px 5px 1px 0;
+      vertical-align: top;
+      overflow-wrap: anywhere;
+    }
+
+    .skill-table[aria-label="Database and ERP skills"] br {
+      display: none;
+    }
+
+    .content {
+      grid-column: 2;
+      grid-row: 1;
+      padding: 0 36px 46px;
+      background: var(--resume-paper);
+    }
+
+    .hero {
+      position: relative;
+      margin: 0 -36px 18px;
+      padding: 45px 36px 28px;
+      text-align: center;
+      background: var(--resume-paper);
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      z-index: 0;
+      top: 12%;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      border-radius: 0;
+      background: var(--resume-band);
+    }
+
+    .hero>* {
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero .eyebrow {
+      margin: 0 0 16px;
+      color: var(--resume-muted);
+      font-size: 10px;
+      letter-spacing: .16em;
+    }
+
+    .hero h1 {
+      margin: 0;
+      color: var(--resume-ink);
+      font-family: Georgia, serif;
+      font-size: clamp(36px, 5vw, 55px);
+      line-height: 1;
+    }
+
+    .hero .english-name {
+      margin: 7px 0 12px;
+      color: var(--resume-ink);
+      font-size: 16px;
+      letter-spacing: .28em;
+    }
+
+    .hero h2 {
+      max-width: 520px;
+      margin: 0 auto;
+      color: #526b94;
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: .1em;
+      transform: translateY(16px);
+    }
+
+    .tag-row {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 7px;
+      margin-top: 19px;
+      transform: translateY(16px);
+    }
+
+    .tag-row span {
+      padding: 5px 10px;
+      border: 1px solid #7894c4;
+      border-radius: 8px;
+      color: #49658f;
+      font-size: 10px;
+      letter-spacing: .08em;
+    }
+
+    .main-section {
+      margin-top: 18px;
+      background: transparent;
+    }
+
+    .section-title {
+      margin-bottom: 18px;
+      padding-top: 16px;
+      border-top: 3px solid #5278bd;
+    }
+
+    .profile-section {
+      color: #536987;
+      font-size: 13px;
+      letter-spacing: .025em;
+      text-align: justify;
+    }
+
+    .profile-section p {
+      margin: 0;
+    }
+
+    .job {
+      display: grid;
+      grid-template-columns: 112px 1fr;
+      gap: 18px;
+      margin: 0 0 28px;
+    }
+
+    .job-meta {
+      position: relative;
+      color: var(--resume-muted);
+      font-size: 12.5px;
+      font-weight: 700;
+      letter-spacing: .09em;
+    }
+
+    .job-meta span::after {
+      content: "";
+      display: block;
+      width: 86px;
+      height: 2px;
+      margin-top: 8px;
+      background: var(--resume-sage);
+    }
+
+    .job-meta::after {
+      content: "";
+      position: absolute;
+      top: 10px;
+      right: -10px;
+      bottom: -38px;
+      width: 2px;
+      background: #b5c7e8;
+    }
+
+    .job:last-child .job-meta::after {
+      display: none;
+    }
+
+    .job-meta i,
+    .education-item::after {
+      box-sizing: border-box;
+      width: 12px;
+      height: 12px;
+      border: 3px solid var(--resume-sage);
+      border-radius: 50%;
+      background: var(--resume-paper);
+    }
+
+    .job-meta i {
+      position: absolute;
+      top: 4px;
+      right: -15px;
+      z-index: 2;
+    }
+
+    .job-duration {
+      display: block;
+      font-size: 0.85em;
+      font-weight: normal;
+      color: var(--resume-muted);
+      margin-top: 4px;
+    }
+
+    .job-heading {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+    }
+
+    .job h3 {
+      margin: 0;
+      color: var(--resume-ink);
+      font-size: 14px;
+      font-weight: 800;
+    }
+
+    .job h4 {
+      margin: 3px 0 8px;
+      color: var(--resume-muted);
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: .08em;
+    }
+
+    .job .location {
+      color: var(--resume-muted);
+      font-size: 10px;
+      white-space: nowrap;
+    }
+
+    .job p,
+    .job li {
+      color: #5e718f;
+      font-size: 11.5px;
+      letter-spacing: .035em;
+    }
+
+    .job p {
+      margin: 0;
+    }
+
+    .job ul {
+      margin: 7px 0 0;
+      padding-left: 16px;
+    }
+
+    .job li {
+      margin-bottom: 5px;
+    }
+
+    .bottom-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 28px;
+      margin-top: 26px;
+    }
+
+    .card {
+      min-width: 0;
+      border: 0;
+      background: transparent;
+      box-shadow: none;
+    }
+
+    .section-title.compact {
+      margin-bottom: 14px;
+    }
+
+    .education-item {
+      position: relative;
+      display: grid;
+      grid-template-columns: 112px max-content 1fr;
+      grid-template-rows: auto;
+      column-gap: 18px;
+      margin-bottom: 22px;
+      padding-bottom: 18px;
+      border-bottom: 1px solid #d6e0f0;
+    }
+
+    .education-item::before {
+      content: "";
+      position: absolute;
+      top: 10px;
+      left: 121px;
+      bottom: -23px;
+      width: 2px;
+      background: #b5c7e8;
+    }
+
+    .education-item::after {
+      content: "";
+      position: absolute;
+      top: 4px;
+      left: 116px;
+      z-index: 2;
+    }
+
+    .education-item:last-child {
+      margin-bottom: 0;
+    }
+
+    .education-item:last-child::before {
+      display: none;
+    }
+
+    .education-item strong,
+    .education-item span,
+    .education-item small {
+      display: block;
+    }
+
+    .education-item strong {
+      grid-column: 2;
+      grid-row: 1;
+      color: var(--resume-ink);
+      font-size: 14px;
+    }
+
+    .education-item span {
+      grid-column: 3;
+      grid-row: 1;
+      align-self: center;
+      color: var(--resume-muted);
+      font-size: 11px;
+      letter-spacing: .08em;
+    }
+
+    .education-item small {
+      grid-column: 1;
+      grid-row: 1 / span 2;
+      color: var(--resume-muted);
+      font-size: 11px;
+      letter-spacing: .09em;
+    }
+
+    .education-item small::after {
+      content: "";
+      display: block;
+      width: 106px;
+      height: 2px;
+      margin-top: 8px;
+      background: var(--resume-sage);
+    }
+
+    .strengths-card {
+      grid-column: 1 / -1;
+    }
+
+    .strength-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 7px;
+    }
+
+    .strength-list span {
+      padding: 5px 8px;
+      border-radius: 7px;
+      background: var(--resume-band);
+      color: #3f5e91;
+      font-size: 10px;
+    }
+
+    /* Increase every type level in the right-hand content by one step. */
+    .content .hero .eyebrow {
+      font-size: 11px;
+    }
+
+    .content .hero h1 {
+      font-size: clamp(38px, 5.2vw, 57px);
+    }
+
+    .content .hero .english-name {
+      font-size: 17px;
+    }
+
+    .content .hero h2 {
+      font-size: 14px;
+    }
+
+    .content .tag-row span {
+      font-size: 11px;
+    }
+
+    .content .main-section h2,
+    .content .card h2 {
+      font-size: 20px;
+    }
+
+    .content .profile-section,
+    .content .profile-section p {
+      font-size: 14px;
+    }
+
+    .content .job-meta {
+      font-size: 13.5px;
+    }
+
+    .content .job h3 {
+      font-size: 15px;
+    }
+
+    .content .job h4 {
+      font-size: 12px;
+    }
+
+    .content .job .location {
+      font-size: 11px;
+    }
+
+    .content .job p,
+    .content .job li {
+      font-size: 12.5px;
+    }
+
+    .content .education-item strong {
+      font-size: 15px;
+    }
+
+    .content .education-item span,
+    .content .education-item small {
+      font-size: 12px;
+    }
+
+    .content .strength-list span {
+      font-size: 11px;
+    }
+
+    @media (max-width: 760px) {
+      body.resume-body {
+        padding: 0;
+      }
+
+      .resume-page {
+        display: block;
+        min-height: 0;
+      }
+
+      .sidebar {
+        padding: 34px 25px;
+      }
+
+      .portrait-wrap {
+        width: 45mm;
+        height: 45mm;
+      }
+
+      .content {
+        padding: 0 25px 36px;
+      }
+
+      .hero {
+        margin: 0 -25px 28px;
+        padding: 55px 25px 42px;
+      }
+
+      .job {
+        grid-template-columns: 1fr;
+        gap: 7px;
+      }
+
+      .job-meta i,
+      .job-meta::after {
+        display: none;
+      }
+
+      .bottom-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .education-item {
+        grid-template-columns: max-content 1fr;
+        gap: 4px 10px;
+      }
+
+      .education-item small {
+        grid-column: 1 / -1;
+        grid-row: 1;
+      }
+
+      .education-item strong {
+        grid-column: 1;
+        grid-row: 2;
+      }
+
+      .education-item span {
+        grid-column: 2;
+        grid-row: 2;
+      }
+
+      .education-item small::after {
+        display: none;
+      }
+
+      .education-item::before,
+      .education-item::after {
+        display: none;
+      }
+    }
+
+    @media print {
+      @page {
+        size: A4;
+        margin: 0;
+      }
+
+      html,
+      body {
+        width: 210mm;
+        height: 297mm;
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+      }
+
+      body.resume-body {
+        padding: 0;
+        width: 210mm;
+        height: 297mm;
+        overflow: hidden;
+        background: #fff;
+        print-color-adjust: exact;
+        -webkit-print-color-adjust: exact;
+      }
+
+      .resume-page {
+        position: fixed;
+        inset: 0 auto auto 0;
+        width: 210mm;
+        height: 296mm;
+        max-height: 296mm;
+        min-height: 0;
+        grid-template-columns: 64mm 146mm;
+        overflow: hidden;
+        box-shadow: none;
+        break-inside: avoid;
+        break-after: avoid;
+        page-break-inside: avoid;
+        page-break-after: avoid;
+        border-radius: 4mm;
+      }
+
+      .sidebar {
+        padding: 8mm 5.5mm 7mm;
+        border-radius: 4mm;
+      }
+
+      .portrait-wrap {
+        width: 45mm;
+        height: 45mm;
+        margin-bottom: 1mm;
+      }
+
+      .side-section {
+        margin-bottom: 4mm;
+      }
+
+      .side-section h2 {
+        font-size: 8.5pt;
+      }
+
+      .side-rule {
+        margin: 1.2mm 0 1.8mm;
+      }
+
+      .side-section p,
+      .side-section li {
+        font-size: 6.7pt;
+        line-height: 1.25;
+      }
+
+      .side-section li,
+      .contact p {
+        margin-bottom: 1.2mm;
+      }
+
+      .skill-group {
+        margin-top: 2.2mm;
+      }
+
+      .skill-group h3 {
+        margin-bottom: .8mm;
+        font-size: 6.8pt;
+      }
+
+      .skill-table {
+        font-size: 6.3pt;
+        line-height: 1.25;
+      }
+
+      .content {
+        padding: 0 8mm 6mm;
+      }
+
+      .hero {
+        margin: 0 -8mm 5mm;
+        padding: 10mm 8mm 10mm;
+      }
+
+      .hero .eyebrow {
+        margin-bottom: 2mm;
+        font-size: 5.8pt;
+      }
+
+      .hero h1 {
+        font-size: 25pt;
+      }
+
+      .hero .english-name {
+        margin: 1.2mm 0 1.8mm;
+        font-size: 8pt;
+      }
+
+      .hero h2 {
+        font-size: 7pt;
+      }
+
+      .tag-row {
+        margin-top: 2.5mm;
+      }
+
+      .tag-row span {
+        padding: 1mm 2mm;
+        font-size: 5.8pt;
+      }
+
+      .main-section {
+        margin-top: 4mm;
+      }
+
+      .section-title {
+        margin-bottom: 2.5mm;
+        padding-top: 2.5mm;
+      }
+
+      .section-title h2,
+      .card h2 {
+        font-size: 9pt;
+      }
+
+      .profile-section,
+      .profile-section p {
+        font-size: 6.8pt;
+        line-height: 1.4;
+      }
+
+      .job {
+        grid-template-columns: 27mm 1fr;
+        gap: 4mm;
+        margin-bottom: 3mm;
+      }
+
+      .job-meta,
+      .job p,
+      .job li {
+        font-size: 6.2pt;
+        line-height: 1.3;
+      }
+
+      .job-meta {
+        font-size: 6.8pt;
+      }
+
+      .job-meta span::after {
+        width: 20mm;
+        margin-top: 1.5mm;
+      }
+
+      .job h3 {
+        font-size: 8pt;
+      }
+
+      .job h4 {
+        margin-bottom: 1mm;
+        font-size: 6pt;
+      }
+
+      .job ul {
+        margin-top: 1mm;
+      }
+
+      .job li {
+        margin-bottom: .7mm;
+      }
+
+      .bottom-grid {
+        gap: 3mm;
+        margin-top: 3mm;
+      }
+
+      .education-item {
+        grid-template-columns: 27mm max-content 1fr;
+        gap: 4mm;
+        margin-bottom: 2mm;
+        padding-bottom: 2mm;
+      }
+
+      .education-item::before {
+        left: 29mm;
+        bottom: -3mm;
+      }
+
+      .education-item::after {
+        left: calc(29mm - 5px);
+      }
+
+      .education-item strong {
+        font-size: 7.5pt;
+      }
+
+      .education-item span,
+      .education-item small,
+      .strength-list span {
+        font-size: 6pt;
+      }
+    }
+  </style>
+</head>
+
+<body class="resume-body">
+  <!-- 可直接修改姓名、聯絡方式與各段工作期間 -->
+  <main class="resume-page">
+    <aside class="sidebar">
+      <div class="portrait-wrap">
+        <img src="img/profile-transparent-v3.png" alt="個人照片" class="portrait" />
+      </div>
+
+      <section class="side-section contact">
+        <h2>CONTACT</h2>
+        <div class="side-rule"></div>
+        <p><strong>手機</strong><span>0910-577-911</span></p>
+        <p><strong>Email</strong><span><a href="mailto:eagle.chen@gmail.com">eagle.chen@gmail.com</a></span></p>
+        <p><strong>地址</strong><span>台中市</span></p>
+        <p><strong>github</strong><span><a href="https://github.com/bigkuan-chen" target="_blank">github.com/bigkuan-chen</a></span></p>
+        <p><strong>作品集</strong><span><a href="https://bigkuan-chen.github.io/bigkuan-website/" target="_blank">bigkuan-chen.github.io/bigkuan-website/</a></span></p>
+      </section>
+
+      <section class="side-section">
+        <h2>CORE EXPERTISE</h2>
+        <div class="side-rule"></div>
+        <ul>
+          <li>企業系統分析與設計 SA / SD</li>
+          <li>ERP、Workflow 架構與開發</li>
+          <li>需求訪談與跨部門整合</li>
+          <li>專案規劃、時程與品質管理</li>
+          <li>資料庫設計與 SQL 效能調校</li>
+          <li>程式碼與規格文件 Review</li>
+        </ul>
+      </section>
+
+      <section class="side-section">
+        <h2>TECHNICAL SKILLS</h2>
+        <div class="side-rule"></div>
+        <div class="skill-group">
+          <h3>Development</h3>
+          <ul>
+            <li>Java</li>
+            <li>Spring Boot</li>
+
+
+            <li>ZK</li>
+
+            <li>ASP</li>
+
+            <li>Visual Basic</li>
+
+            <li>Delphi</li>
+
+            <li>HTML5</li>
+
+            <li>CSS3</li>
+
+            <li>JavaScript</li>
+
+            <li>Python</li>
+
+            <li>n8n</li>
+
+            <li>Next.js</li>
+
+            <li>FastAPI</li>
+
+            <li>Django</li>
+
+            <li>Bootstrap</li>
+
+            <li>D2K</li>
+          </ul>
+
+
+        </div>
+        <div class="skill-group">
+          <h3>Database & ERP Technologies</h3>
+          <ul>
+            <li>Oracle</li>
+            <li>MS SQL Server</li>
+
+            <li>PL/SQL</li>
+            <li>SQL Optimization</li>
+
+            <li>Oracle Developer 2000</li>
+
+            <li>MS SSIS</li>
+            <li>MS SSAS</li>
+
+            <li>Crystal Report</li>
+          </ul>
+
+        </div>
+        <div class="skill-group">
+          <h3>Others</h3>
+          <ul>
+            <li>Git</li>
+            <li>Docker</li>
+
+          </ul>
+
+        </div>
+      </section>
+
+      <section class="side-section">
+        <h2>CERTIFICATION</h2>
+        <div class="side-rule"></div>
+        <ul>
+          <li>SCJP - Sun Certified Java Programmer</li>
+          <li>丙級會計事務技術士</li>
+        </ul>
+      </section>
+
+    </aside>
+
+    <section class="content">
+      <header class="hero">
+        <p class="eyebrow">SENIOR SOFTWARE ENGINEER · SYSTEM ANALYST/DESIGN · PROJECT LEAD</p>
+        <h1>陳冠良</h1>
+        <p class="english-name">KUAN-LIANG CHEN</p>
+        <h2>資深軟體工程師｜系統分析/設計｜專案管理 | AI應用工程師</h2>
+        <div class="tag-row" style="display: none;">
+          <span>ERP</span><span>Workflow</span><span>SA / SD</span><span>AI Development</span>
+        </div>
+      </header>
+
+      <section class=" main-section profile-section">
+        <div class="section-title">
+          <h2>PROFILE</h2>
+        </div>
+        <p>
+          擁有近 20 年系統開發與專案管理經驗，專精於企業資源規劃（ERP）及工作流程簽核系統的架構設計與系統整合。
+          具備扎實的系統分析（SA／SD）、需求訪談、資料庫設計及跨部門溝通能力，可獨立完成從需求釐清、架構規劃、開發測試到部署維運的完整專案生命週期。
+          近期於中興大學進修人工智慧與數據分析課程，積極鑽研 Python、Vibe Coding、機器學習、LLM、RAG 及向量資料庫等技術。
+          未來，我將結合多年累積的系統分析、架構設計與專案規劃經驗，運用Vibe Coding與 AI 相關應用，加速開發流程，讓創意化為可落地的解決方案，打造兼具實用性、擴充性與創新價值的應用專案。
+        </p>
+      </section>
+
+      <section class="main-section experience-section">
+        <div class="section-title">
+          <h2>PROFESSIONAL EXPERIENCE</h2>
+        </div>
+
+        <article class="job featured">
+          <div class="job-meta">
+            <span>2005 - 2024</span>
+            <div class="job-duration">年資：20年</div>
+            <i></i>
+          </div>
+          <div class="job-body">
+            <div class="job-heading">
+              <div>
+                <h3>專案課長</h3>
+                <h4>盛群半導體股份有限公司｜IC 設計業</h4>
+              </div>
+              <span class="location">新竹市</span>
+            </div>
+            <ul>
+              <li>負責企業核心系統之需求訪談、SA／SD、程式開發、測試部署及專案管理。</li>
+              <li>參與並主導 ASP 舊系統逐步轉型為 Java Web 架構，提升系統穩定性、維護性與擴充性。</li>
+              <li>完成產品管理、晶圓採購、打線圖、配貨及 Workflow 等系統建置與改版。</li>
+              <li>負責 ERP、Workflow、銷售統計報表及資料庫架構，並執行程式碼、SQL 與規格文件 Review。</li>
+            </ul>
+          </div>
+        </article>
+
+        <article class="job">
+          <div class="job-meta">
+            <span>2004 - 2005</span>
+            <div class="job-duration">年資：1年</div>
+            <i></i>
+          </div>
+          <div class="job-body">
+            <div class="job-heading">
+              <div>
+                <h3>MIS 程式設計師</h3>
+                <h4>明泰科技股份有限公司｜電子零組件業</h4>
+              </div>
+              <span class="location">新竹市</span>
+            </div>
+            <p>負責企業 Workflow 系統表單與功能開發，以 Java／JSP 進行系統維護與需求實作，並協助使用者問題處理及系統文件整理。</p>
+          </div>
+        </article>
+
+        <article class="job">
+          <div class="job-meta">
+            <span>2003 - 2004</span>
+            <div class="job-duration">年資：1.5年</div>
+            <i></i>
+          </div>
+          <div class="job-body">
+            <div class="job-heading">
+              <div>
+                <h3>高級程式設計師</h3>
+                <h4>國興資訊股份有限公司｜電腦軟體服務業</h4>
+              </div>
+              <span class="location">台中市</span>
+            </div>
+            <p>參與行政院主計處會計歲計系統開發，負責程式與報表建置，運用複雜 SQL 整合會計與預算資料，確保報表正確性與可追溯性。</p>
+          </div>
+        </article>
+      </section>
+
+      <section class="bottom-grid">
+        <section class="card education-card">
+          <div class="section-title compact">
+            <h2>EDUCATION</h2>
+          </div>
+          <div class="education-item">
+            <strong>國立交通大學</strong>
+            <span>資訊所 碩士</span>
+            <small>2010/09 - 2013/01</small>
+          </div>
+          <div class="education-item">
+            <strong>朝陽科技大學</strong>
+            <span>資訊管理系 學士</span>
+            <small>2000/09 - 2003/06</small>
+          </div>
+        </section>
+
+        <section class="card strengths-card">
+          <div class="section-title compact">
+            <h2>AI - Currently Learning</h2>
+          </div>
+          <div class="strength-list">
+            <span>Python</span>
+            <span>Generative AI</span>
+            <span>Prompt Engineering</span>
+            <span>Machine Learning</span>
+            <span>Vibe Coding</span>
+            <span>LLM</span>
+            <span>RAG</span>
+            <span>Vector Database</span>
+          </div>
+        </section>
+      </section>
+
+    </section>
+  </main>
+</body>
+
+</html>
