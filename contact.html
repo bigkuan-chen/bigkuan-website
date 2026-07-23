@@ -19,24 +19,7 @@
 <body>
     <div id="app" v-cloak>
         <!-- Navigation Header -->
-        <header :class="{ 'scrolled': scrolled }">
-            <nav>
-                <a href="index.html#home" class="logo">
-                    <img src="img/can-icon.svg" alt="Can Logo"
-                        style="height: 32px; width: 32px; vertical-align: middle; margin-right: 8px;">
-                    Big Kuan
-                </a>
-                <ul class="nav-links" :class="{ 'active': menuActive }">
-                    <li><a href="index.html#home">Home</a></li>
-                    <li><a href="portfolio.html">Portfolio</a></li>
-                    <li><a href="about.html">About</a></li>
-                    <li><a href="index.html#contact" class="active">Contact</a></li>
-                </ul>
-                <div class="menu-toggle" @click="toggleMenu">
-                    <i :class="menuActive ? 'fas fa-times' : 'fas fa-bars'"></i>
-                </div>
-            </nav>
-        </header>
+        <div id="header-placeholder"></div>
 
         <!-- Main Content -->
         <main class="contact-page">
@@ -69,24 +52,21 @@
         </main>
 
         <!-- Footer -->
-        <footer>
-            <!-- <div class="footer-socials">
-                <a href="https://github.com/bigkuan-chen" target="_blank"><i class="fab fa-github"></i></a>
-                <a href="https://linkedin.com" target="_blank"><i class="fab fa-linkedin"></i></a>
-                <a href="mailto:eagle.chen@gmail.com"><i class="fas fa-envelope"></i></a>
-            </div> -->
-            <p>&copy; {{ currentYear }} by CHEN KUAN LIANG. All rights reserved.</p>
-        </footer>
+        <div id="footer-placeholder"></div>
     </div>
 
     <!-- Vue 3 and GSAP CDNs -->
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js"></script>
+    <script src="js/header.js"></script>
+    <script src="js/footer.js"></script>
 
     <script>
         const { createApp } = Vue;
 
-        createApp({
+        Promise.all([initHeader(), initFooter()]).then(() => {
+            createApp({
+                mixins: [headerMixin],
             data() {
                 return {
                     scrolled: false,
@@ -166,6 +146,7 @@
                 window.removeEventListener('scroll', this.handleScroll);
             }
         }).mount('#app');
+    });
     </script>
 </body>
 

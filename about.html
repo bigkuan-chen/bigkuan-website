@@ -19,24 +19,7 @@
 <body>
     <div id="app" v-cloak>
         <!-- Navigation Header -->
-        <header :class="{ 'scrolled': scrolled }">
-            <nav>
-                <a href="index.html#home" class="logo">
-                    <img src="img/can-icon.svg" alt="Can Logo"
-                        style="height: 32px; width: 32px; vertical-align: middle; margin-right: 8px;">
-                    Big Kuan
-                </a>
-                <ul class="nav-links" :class="{ 'active': menuActive }">
-                    <li><a href="index.html#home">Home</a></li>
-                    <li><a href="portfolio.html">Portfolio</a></li>
-                    <li><a href="about.html" class="active">About</a></li>
-                    <li><a href="index.html#contact">Contact</a></li>
-                </ul>
-                <div class="menu-toggle" @click="toggleMenu">
-                    <i :class="menuActive ? 'fas fa-times' : 'fas fa-bars'"></i>
-                </div>
-            </nav>
-        </header>
+        <div id="header-placeholder"></div>
 
         <!-- Main Content -->
         <main class="about-page">
@@ -48,7 +31,7 @@
             <div class="about-grid">
                 <!-- Left Column: Portrait Profile -->
                 <div class="about-photo-wrapper" ref="photoCol">
-                    <img src="img/myphoto.png" alt="Profile Portrait" class="about-photo">
+                    <img src="img/profile_formal.png" alt="Profile Portrait" class="about-photo">
                 </div>
 
                 <!-- Right Column: Biography & Skills -->
@@ -61,7 +44,8 @@
                     <p>工作之外，我熱衷於羽球與登山。這些運動讓我維持良好的體能、穩定的心理素質與持續的專注力，使我在面對高壓的開發環境、複雜的系統問題與長時間的系統維運時，依然能保持良好的續航力與抗壓性。</p>
                     <p>我熱愛學習新技術，並持續關注人工智慧、機器學習與資料分析等領域的發展。目前正在國立中興大學進修 Python 相關的 AI 人工智慧與數據分析應用課程，透過系統化的學習，強化 Python
                         程式設計、資料處理、資料視覺化、機器學習模型與實務專題開發能力。</p>
-
+                    <p>未來，我將結合多年累積的系統分析、架構設計與專案規劃經驗，運用Vibe Coding與 AI 技術相關應用，加速開發流程，讓創意化為可落地的解決方案，打造兼具實用性、擴充性與創新價值的應用專案。
+                    </p>
                     <!-- Technical Skills Wrapper -->
                     <div class="skills-wrapper">
                         <h3>Technical Skills</h3>
@@ -136,90 +120,88 @@
         </main>
 
         <!-- Footer -->
-        <footer>
-            <!-- <div class="footer-socials">
-                <a href="https://github.com/bigkuan-chen" target="_blank"><i class="fab fa-github"></i></a>
-                <a href="https://linkedin.com" target="_blank"><i class="fab fa-linkedin"></i></a>
-                <a href="mailto:eagle.chen@gmail.com"><i class="fas fa-envelope"></i></a>
-            </div> -->
-            <p>&copy; {{ currentYear }} by CHEN KUAN LIANG. All rights reserved.</p>
-        </footer>
+        <div id="footer-placeholder"></div>
     </div>
 
     <!-- Vue 3 and GSAP CDNs -->
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/ScrollTrigger.min.js"></script>
+    <script src="js/header.js"></script>
+    <script src="js/footer.js"></script>
 
     <script>
         const { createApp } = Vue;
 
-        createApp({
-            data() {
-                return {
-                    scrolled: false,
-                    menuActive: false,
-                    currentYear: new Date().getFullYear()
-                }
-            },
-            methods: {
-                handleScroll() {
-                    this.scrolled = window.scrollY > 50;
+        Promise.all([initHeader(), initFooter()]).then(() => {
+            createApp({
+                mixins: [headerMixin],
+                data() {
+                    return {
+                        scrolled: false,
+                        menuActive: false,
+                        currentYear: new Date().getFullYear()
+                    }
                 },
-                toggleMenu() {
-                    this.menuActive = !this.menuActive;
+                methods: {
+                    handleScroll() {
+                        this.scrolled = window.scrollY > 50;
+                    },
+                    toggleMenu() {
+                        this.menuActive = !this.menuActive;
+                    },
+                    initAnimations() {
+                        gsap.registerPlugin(ScrollTrigger);
+
+                        // Title slide down
+                        gsap.from(this.$refs.pageTitle, {
+                            opacity: 0,
+                            y: -30,
+                            duration: 0.8,
+                            ease: "power3.out"
+                        });
+
+                        // Photo slide in from left
+                        gsap.from(this.$refs.photoCol, {
+                            opacity: 0,
+                            x: -50,
+                            duration: 1,
+                            ease: "power3.out",
+                            scrollTrigger: {
+                                trigger: this.$refs.photoCol,
+                                start: 'top bottom-=100',
+                                toggleActions: 'play none none reverse'
+                            }
+                        });
+
+                        // Bio text slide in from right
+                        gsap.from(this.$refs.textCol, {
+                            opacity: 0,
+                            x: 50,
+                            duration: 1,
+                            ease: "power3.out",
+                            scrollTrigger: {
+                                trigger: this.$refs.textCol,
+                                start: 'top bottom-=100',
+                                toggleActions: 'play none none reverse'
+                            }
+                        });
+
+                    }
                 },
-                initAnimations() {
-                    gsap.registerPlugin(ScrollTrigger);
+                mounted() {
+                    window.addEventListener('scroll', this.handleScroll);
+                    this.handleScroll(); // initial state check
 
-                    // Title slide down
-                    gsap.from(this.$refs.pageTitle, {
-                        opacity: 0,
-                        y: -30,
-                        duration: 0.8,
-                        ease: "power3.out"
+                    this.$nextTick(() => {
+                        this.initAnimations();
                     });
-
-                    // Photo slide in from left
-                    gsap.from(this.$refs.photoCol, {
-                        opacity: 0,
-                        x: -50,
-                        duration: 1,
-                        ease: "power3.out",
-                        scrollTrigger: {
-                            trigger: this.$refs.photoCol,
-                            start: 'top bottom-=100',
-                            toggleActions: 'play none none reverse'
-                        }
-                    });
-
-                    // Bio text slide in from right
-                    gsap.from(this.$refs.textCol, {
-                        opacity: 0,
-                        x: 50,
-                        duration: 1,
-                        ease: "power3.out",
-                        scrollTrigger: {
-                            trigger: this.$refs.textCol,
-                            start: 'top bottom-=100',
-                            toggleActions: 'play none none reverse'
-                        }
-                    });
-
+                },
+                unmounted() {
+                    window.removeEventListener('scroll', this.handleScroll);
                 }
-            },
-            mounted() {
-                window.addEventListener('scroll', this.handleScroll);
-                this.handleScroll(); // initial state check
-
-                this.$nextTick(() => {
-                    this.initAnimations();
-                });
-            },
-            unmounted() {
-                window.removeEventListener('scroll', this.handleScroll);
-            }
-        }).mount('#app');
+            }).mount('#app');
+        });
     </script>
 </body>
 
