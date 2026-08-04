@@ -103,7 +103,7 @@
                     currentYear: new Date().getFullYear(),
                     filterCategory: 'All',
                     selectedItem: null,
-                    categories: ['All', 'Machine Learning', 'Security and Cryptography', 'AI and Data Science', 'Automation and Tools'],
+                    categories: ['All', 'Machine Learning', 'Security and Cryptography', 'AI and Data Science', 'Web Applications & Games', 'Automation and Tools'],
                     portfolioItems: [
                         {
                             title: '十大機器學習演算法互動學習平台',
@@ -149,7 +149,17 @@
                             description: 'Google Flights 機票降價追蹤通知器是一款基於 <strong>Python</strong> 開發的機票降價監控與自動通知系統。<br><br><strong>核心功能特色：</strong><br>• <strong>彈性雙重搜尋模式</strong>：支援「單一日期」去回程追蹤與「區間彈性搜尋模式」（可設定長日期區間與旅遊天數，自動排列所有起迄組合，進行批量票價查詢與最低價排序推薦）。<br>• <strong>歷史票價追蹤與比對</strong>：整合本地 <strong>SQLite 資料庫</strong> 記錄每次查詢票價與連結，自動與同日期組合之歷史最低票價比對，精準判斷降價幅度。<br>• <strong>雙通道自動推播通知</strong>：當查得票價低於預設「理想預算」或低於「歷史最低價」時，自動透過 <strong>LINE Messaging API</strong> 推送私訊警報，並透過 <strong>Brevo (Sendinblue) Email API</strong> 發送精美的 HTML 格式化降價通知信。<br>• <strong>GitHub Actions 雲端自動化執行</strong>：支援設定定時排程（Cron Job），免用實體主機，自動運行並將更新後的 SQLite 資料庫提交回存至 GitHub 專案。',
                             demoLink: '',
                             githubLink: 'https://github.com/bigkuan-chen/flights_freedom'
+                        },
+                        {
+                            title: 'Agar.io 網頁版遊戲專案',
+                            category: 'Web Applications & Games',
+                            image: 'img/agar-io-thumb.png',
+                            excerpt: '基於 React 19、Next.js 16 與 HTML5 Canvas 的經典細胞吞噬遊戲，具備智慧 AI 機器人對戰、分裂與噴射機制，並整合 Drizzle D1/R2 與 SIWC 身分驗證。',
+                            description: '本專案是一個基於網頁技術重建的經典 <strong>Agar.io（細胞吞噬）遊戲</strong>。玩家在遊戲中扮演一個小細胞，透過吞噬隨機分佈在地圖上的食物顆粒與比自己小的其他細胞（包括 24 個擁有智慧的 AI 機器人）來不斷壯大自己，同時需要避免被更大的細胞或綠色病毒吞噬。<br><br><strong>核心功能與技術特色：</strong><br>• <strong>高效 Canvas 渲染</strong>：所有細胞、食物、病毒與背景網格皆透過 HTML5 Canvas API 進行高效 2D 渲染，在大物體數量下依然能流暢保持高幀率。<br>• <strong>現代前端架構</strong>：採用 <strong>React 19 & Next.js 16</strong> 並透過 Vinext 輕量化適配器驅動，專為 Edge / Cloudflare Workers 環境優化。<br>• <strong>完整物理與控制機制</strong>：實現分裂（Split）、噴射質量（Eject）、質量衰減、吞噬判定及依細胞質量動態調整的移動速度公式。<br>• <strong>Drizzle ORM 與 Cloudflare 綁定</strong>：使用 Drizzle ORM，預先規劃並整合 <strong>Cloudflare D1 (SQL 資料庫)</strong> 與 <strong>R2 (對象儲存)</strong> 以記錄玩家歷史戰績與持久化數據。<br>• <strong>SIWC 身分驗證</strong>：整合 Sign-In With ChatGPT，能無縫驗證並取得 ChatGPT 工作區使用者資訊。',
+                            demoLink: 'https://agar-arena-play.eagle-chen.chatgpt.site/',
+                            githubLink: 'https://github.com/bigkuan-chen/kuan-agar.io.git'
                         }
+                    
                     ]
                 }
             },
